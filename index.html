@@ -1759,119 +1759,7 @@ jQuery(document).ready(function($) {
       <p class="meta"><time datetime="2014-08-12T22:12:00" pubdate>août 12, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">test</span> <span class="n">code</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">test</span> <span class="n">code</span> <span class="mi">2</span>
-</pre></div>
-
-</div>
-
-</div>
-
-</div>
-                test raw
-                
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[1]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[1]:</div>
-
-
-<pre class="ipynb">2</pre>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[1]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[1]:</div>
-
-<div class="output_html rendered_html output_subarea output_pyout">
-
-    <small>
-    <p> This post was written as an IPython notebook.  It is available for
-    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/test.ipynb">download</a> or as a static
-    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/test.ipynb">html</a>.</p>
-    <p></p>
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
-    alt="Creative Commons License" style="border-width:0"
-    src ...</a></small></div></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook test.ipynb cells[1:] %}</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/08/12/le résumé de la chose/">Read On &crarr;</a>
   </footer>
@@ -1884,40 +1772,7 @@ In&nbsp;[1]:
       <p class="meta"><time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[2]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="c"># We begin with two utilitary functions</span>
-<span class="k">def</span> <span class="nf">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="c">#This converts a decimal number into a matrix of (int) bits</span>
-    <span class="n">ll</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">&quot;{0:04b}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="c">#.format give a string which is converted to a list</span>
-    <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for ...</span></pre></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook Hamming_code.ipynb cells[1:] %}</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Read On &crarr;</a>
   </footer>
@@ -1930,37 +1785,7 @@ In&nbsp;[2]:
       <p class="meta"><time datetime="2014-06-12T22:12:00" pubdate>juin 12, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[1]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">tomat</span><span class="p">(</span><span class="o">*</span><span class="n">Z</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts the list of arrays in *Z to matrices&quot;&quot;&quot;</span>
-    <span class="n">Out</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="n">Z</span><span class="p">:</span>
-        <span class="nb">iter</span><span class="o">=</span><span class="n">mat</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
-        <span class="n">Out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Out</span>
-    
-<span class="k">def</span> <span class="nf">toarray</span><span class="p">(</span><span class="o">*</span><span class="n">Z</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts the list of matrices in *Z to arrays&quot;&quot;&quot;</span>
-    <span class="n">Out</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="n">Z</span><span class="p">:</span>
-        <span class="nb">iter</span><span class="o">=</span><span class="n">array</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
-        <span class="n">Out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">iter ...</span></pre></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook Convert_between_matrices_and_arrays.ipynb cells[1:] %}</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/06/12/When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays./">Read On &crarr;</a>
   </footer>
@@ -1973,34 +1798,7 @@ In&nbsp;[1]:
       <p class="meta"><time datetime="2014-05-21T23:48:00" pubdate>mai 21, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">mydeploy</span><span class="p">:</span> <span class="n">publish</span>
-	   <span class="k">if</span> <span class="n">test</span> <span class="o">-</span><span class="n">d</span> <span class="n">my_build</span><span class="p">;</span> \
-	   <span class="n">then</span> <span class="n">echo</span> <span class="s">&quot; (_build directory exists)&quot;</span><span class="p">;</span> \
-	   <span class="k">else</span> <span class="n">mkdir</span> <span class="n">my_build</span><span class="p">;</span> \
-	   <span class="n">fi</span>
-	   <span class="k">if</span> <span class="n">test</span> <span class="o">-</span><span class="n">d</span> <span class="n">my_build</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">);</span> \
-	   <span class="n">then</span> <span class="n">echo</span> <span class="s">&quot;  (repository directory exists)&quot;</span><span class="p">;</span> \
-	   <span class="k">else</span> <span class="n">cd</span> <span class="n">my_build</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">USERNAME</span><span class="p">)</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">)</span><span class="o">.</span><span class="n">git</span> \
-            <span class="n">cd</span> <span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span><span class="n">orphan</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span> \ 
-            <span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">rm ...</span></pre></div></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook Third_blog_post.ipynb cells[1:] %}</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/05/21/This is the second post/">Read On &crarr;</a>
   </footer>
@@ -2013,48 +1811,7 @@ In&nbsp;[]:
       <p class="meta"><time datetime="2014-05-20T22:12:00" pubdate>mai 20, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[3]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[3]:</div>
-
-<div class="output_html rendered_html output_subarea output_pyout">
-
-    <small>
-    <p> This post was written as an IPython notebook.  It is available for
-    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Second_blog_post.ipynb">download</a> or as a static
-    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Second_blog_post.ipynb">html</a>.</p>
-    <p></p>
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
-    alt="Creative Commons License" style="border-width:0"
-    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
-    xmlns:dct="http://purl.org ...</small></div></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook Second_blog_post.ipynb cells[1:] %}</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/05/20/This is the second post/">Read On &crarr;</a>
   </footer>
@@ -2067,64 +1824,7 @@ In&nbsp;[3]:
       <p class="meta"><time datetime="2014-05-01T23:05:00" pubdate>mai 01, 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[2]:
-</div>
-
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">pylab</span> <span class="n">inline</span>
-<span class="n">x</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre class="ipynb">Populating the interactive namespace from numpy and matplotlib
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[2]:</div>
-
-
-<pre class="ipynb">[&lt;matplotlib.lines.Line2D at 0x7f093d3d7110&gt;]</pre>
-
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXYAAAEACAYAAACnJV25AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
-AAALEgAACxIB0t1+/AAAIABJREFUeJztnXl0HNWZ9p/WLlne9xVsI1uWbbAJxIEAkWEMwxoWhwAz
-JCFkOxxykhlOMpNk8gXmDBiSmTAwSSaZBBgSJsAkM2RySBBrxG6WyAbiJTa2RWR5w4u8SuqWVN8f
-b667uvpW1b1Vt6qrS+/vHB9b7VZ1dXXV008973vvzViWZYFhGIZJDRWl3gGGYRjGLCzsDMMwKYOF
-nWEYJmWwsDMMw6QMFnaGYZiUwcLOMAyTMkIJe19fH5YtW4YlS5agpaUFX/va10ztF8MwDBOQTNg+
-9mPHjqGhoQEDAwM466yz8M///M8466yzTO0fwzAMo0noKKahoQEAkM1mMTg4iHHjxoXeKYZhGCY4
-oYV9aGgIS5YsweTJk7F8+XK0tLSY2C+GYRgmIKGFvaKiAmvXrsX27dvxwgsvoL293cBuMQzDMEGp
-MrWh0aNH4+KLL8abb76J1tbW44+fdNJJ2LJli6mXYRiGGRbMnTsX7777bqDfDeXY9+7di56eHgBA
-b28vnn76aSxdurTgOVu2bIFlWfzHsvCtb32r5PuQlD98LKI5FldcYeFHP4pmP197zUJLS/kci3L ...</div></div></div></div></div></p></div>
+  <div class="entry-content"><p>{% notebook This_the_first_one.ipynb cells[1:] %}:</p></div>
   <footer>
     <a rel="full-article" href="http://jfbercher.github.io/blog/2014/05/01/the slug of the thing/">Read On &crarr;</a>
   </footer>
@@ -2157,7 +1857,7 @@ b28vnn76aSxdurTgOVu2bIFlWfzHsvCtb32r5PuQlD98LKI5FldcYeFHP4pmP197zUJLS/kci3L ...<
  
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
+    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>  </section>
 
 
     <section>
