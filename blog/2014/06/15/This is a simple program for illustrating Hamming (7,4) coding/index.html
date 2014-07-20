@@ -1758,19 +1758,30 @@ jQuery(document).ready(function($) {
 </header>
 
   <div class="entry-content"><p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="hamming-74-coding">Hamming (7,4) coding</h1>
-<p>A colleague of mine asked me about a simple demonstration of <a href="http://en.wikipedia.org/wiki/Hamming_code">Hamming code</a>. It is inspired by <a href="http://lionel.textmalaysia.com/hamming-code-in-python.html">this link</a>, but unfortunately the code is not available anymore. Below is what I did.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="two-utilitary-functions">Two utilitary functions</h2>
-<p>For encoding and decoding to and from binary number representations</p>
+
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[2]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1800,18 +1811,17 @@ In&nbsp;[2]:
 </pre></div>
 
 </div>
+
 </div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-Number 5 converted into binary: [[0 1 0 1]]
+<pre class="ipynb">Number 5 converted into binary: [[0 1 0 1]]
 And back to a decimal number: 5
-
 </pre>
 </div>
 </div>
@@ -1820,14 +1830,21 @@ And back to a decimal number: 5
 </div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="hamming74-codec">Hamming(7,4) Codec</h2>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[27]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="c">#Method to encode message</span>
 <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
@@ -1868,18 +1885,25 @@ In&nbsp;[27]:
 </pre></div>
 
 </div>
+
 </div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="a-test">A test</h2>
-<p>And finally a test of encoding-decoding with some corruptions of the message.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[28]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">hamm_tst</span><span class="p">():</span>
     
@@ -1908,16 +1932,16 @@ In&nbsp;[28]:
 </pre></div>
 
 </div>
+
 </div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-Please input a number in [0,15] 9
+<pre class="ipynb">Please input a number in [0,15] 9
 binary number:  0b1001
 encoded version:  [[1 0 0 1 1 0 0]]
 Syndrom:  0
@@ -1929,7 +1953,6 @@ new message  [[1 0 1 1 1 0 0]]
 Syndrom:  3
 decoded version:  [[1 0 0 1 1 0 0]]
 The End
-
 </pre>
 </div>
 </div>
@@ -1938,15 +1961,21 @@ The End
 </div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="an-object-oriented-version">An object-oriented version</h2>
-<p>Let us now design an object 'Hamming codec'.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[29]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Hamming_codec</span><span class="p">():</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1973,14 +2002,16 @@ In&nbsp;[29]:
 </pre></div>
 
 </div>
+
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[30]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">t</span><span class="o">=</span><span class="n">Hamming_codec</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s">&#39;1101&#39;</span><span class="p">)</span>
@@ -1991,23 +2022,22 @@ In&nbsp;[30]:
 </pre></div>
 
 </div>
+
 </div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-Code:  [[1 1 0 1 0 0 1]]
+<pre class="ipynb">Code:  [[1 1 0 1 0 0 1]]
 Syndrom:  0
 Decoded value:  [[1 1 0 1 0 0 1]]
 
 And now introduce an error...
 Syndrom:  6
 Decoded value:  [[1 1 0 1 0 0 1]]
-
 </pre>
 </div>
 </div>
@@ -2016,27 +2046,28 @@ Decoded value:  [[1 1 0 1 0 0 1]]
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
 In&nbsp;[33]:
 </div>
+
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
 </pre></div>
 
 </div>
+
 </div>
 
-<div class="vbox output_wrapper">
-<div class="output vbox">
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="hbox output_area"><div class="prompt output_prompt">
+<div class="output_area"><div class="prompt output_prompt">
     Out[33]:</div>
-<div class="box-flex1 output_subarea output_pyout">
 
-<div class="output_html rendered_html">
+<div class="output_html rendered_html output_subarea output_pyout">
 
     <small>
     <p> This post was written as an IPython notebook.  It is available for
@@ -2058,7 +2089,6 @@ In&nbsp;[33]:
         
 </div>
 
-</div>
 </div>
 
 </div>
@@ -2103,7 +2133,7 @@ In&nbsp;[33]:
  
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
+    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
 
 
     <section>
