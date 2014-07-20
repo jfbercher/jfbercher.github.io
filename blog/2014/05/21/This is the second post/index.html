@@ -1758,24 +1758,24 @@ jQuery(document).ready(function($) {
 </header>
 
   <div class="entry-content"><p>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
+<p>The first thing to do is to create an account on <a href="http://pages.github.com/">Github pages</a> and then follow the directions. This drives to</p>
+<ul>
+<li>create a repository, say <code>repo</code></li>
+<li>and then create a <code>gh-pages</code> branch</li>
+</ul>
+<p>then the content will be available (after a few minutes) in http://username.github.io/repo/</p>
+<p><em>The point is that you will have to publish your materials on gh-pages branch.</em></p>
+<p>Here follows the <code>mydeploy</code> section of my Makefile that I used for that purpose:</p>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
 <div class="prompt input_prompt">
 In&nbsp;[]:
 </div>
-
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">mydeploy</span><span class="p">:</span> <span class="n">publish</span>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># &lt;!-- collapse=True --&gt;</span>
+<span class="n">mydeploy</span><span class="p">:</span> <span class="n">publish</span>
 	   <span class="k">if</span> <span class="n">test</span> <span class="o">-</span><span class="n">d</span> <span class="n">my_build</span><span class="p">;</span> \
 	   <span class="n">then</span> <span class="n">echo</span> <span class="s">&quot; (_build directory exists)&quot;</span><span class="p">;</span> \
 	   <span class="k">else</span> <span class="n">mkdir</span> <span class="n">my_build</span><span class="p">;</span> \
@@ -1796,26 +1796,17 @@ In&nbsp;[]:
 </div>
 
 </div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
+<p>However, though it seems not said in the recent docs, it is also possible to create a repository with the very same name as user github address; that is for the the http address <code>username.github.io</code>, create a repository <code>username.github.io</code>. In such a case, files pushed to this repository will be available implicitely, and directly at <code>http://username.github.io</code>. In such a case, it is possible to employ the original Makefile's code:</p>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
 <div class="prompt input_prompt">
 In&nbsp;[]:
 </div>
-
-<div class="collapseheader box-flex1"><span style="font-weight: bold;">Expand Code</span>
-<div class="input_area box-flex1" style="display:none">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">deploy</span><span class="p">:</span> <span class="n">publish</span>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># &lt;!-- collapse=True --&gt;</span>
+<span class="n">deploy</span><span class="p">:</span> <span class="n">publish</span>
 	<span class="k">if</span> <span class="n">test</span> <span class="o">-</span><span class="n">d</span> <span class="n">_build</span><span class="p">;</span> \
 	<span class="n">then</span> <span class="n">echo</span> <span class="s">&quot; (_build directory exists)&quot;</span><span class="p">;</span> \
 	<span class="k">else</span> <span class="n">mkdir</span> <span class="n">_build</span><span class="p">;</span> \
@@ -1835,30 +1826,27 @@ In&nbsp;[]:
 </div>
 
 </div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
 <div class="prompt input_prompt">
 In&nbsp;[1]:
 </div>
-
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
 </pre></div>
 
 </div>
-
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+<div class="vbox output_wrapper">
+<div class="output vbox">
 
 
-<div class="output_area"><div class="prompt output_prompt">
+<div class="hbox output_area"><div class="prompt output_prompt">
     Out[1]:</div>
+<div class="box-flex1 output_subarea output_pyout">
 
-<div class="output_html rendered_html output_subarea output_pyout">
+<div class="output_html rendered_html">
 
     <small>
     <p> This post was written as an IPython notebook.  It is available for
@@ -1880,6 +1868,7 @@ In&nbsp;[1]:
         
 </div>
 
+</div>
 </div>
 
 </div>
@@ -1924,7 +1913,7 @@ In&nbsp;[1]:
  
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
+    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
 
 
     <section>
