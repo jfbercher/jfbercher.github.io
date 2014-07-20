@@ -1,29 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>jfblog</title><link href="http://jfbercher.github.io/" rel="alternate"></link><link href="http://jfbercher.github.io//feeds/all-en.atom.xml" rel="self"></link><id>http://jfbercher.github.io/</id><updated>2014-06-15T22:12:00+02:00</updated><entry><title>Hamming_code</title><link href="http://jfbercher.github.io/blog/2014/06/15/This%20is%20a%20simple%20program%20for%20illustrating%20Hamming%20(7,4)%20coding/" rel="alternate"></link><updated>2014-06-15T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-06-15:blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/</id><summary type="html">&lt;p&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>jfblog</title><link href="http://jfbercher.github.io/" rel="alternate"></link><link href="http://jfbercher.github.io//feeds/all-en.atom.xml" rel="self"></link><id>http://jfbercher.github.io/</id><updated>2014-08-12T22:12:00+02:00</updated><entry><title>test</title><link href="http://jfbercher.github.io/blog/2014/08/12/le%20r%C3%A9sum%C3%A9%20de%20la%20chose/" rel="alternate"></link><updated>2014-08-12T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-08-12:blog/2014/08/12/le résumé de la chose/</id><summary type="html">&lt;p&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[]:
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;test md&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="test-H3"&gt;test H3&lt;a class="anchor-link" href="#test-H3"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+test raw
+
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[1]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
+
+
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[1]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+
+&lt;pre&gt;
+2
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[4]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
+
+
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[4]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+&lt;div class="output_html rendered_html"&gt;
+
+    &lt;small&gt;
+    &lt;p&gt; This post was written as an IPython notebook.  It is available for
+    &lt;a href="http://jfbercher.github.com/jfblog/downloads/notebooks/test.ipynb"&gt;download&lt;/a&gt; or as a static
+    &lt;a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/test.ipynb"&gt;html&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"&gt;&lt;img
+    alt="Creative Commons License" style="border-width:0"
+    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /&gt;&lt;/a&gt;&lt;br /&gt;&lt;span
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title"&gt;jfblog&lt;/span&gt; by &lt;a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL"&gt;J.-F. Bercher&lt;/a&gt; is
+    licensed under a &lt;a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/"&gt;Creative Commons
+    Attribution-ShareAlike 4.0 International License&lt;/a&gt;.&lt;br /&gt;Based on a work at &lt;a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source"&gt;http://jfbercher.github.io/&lt;/a&gt;.
+        
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>test</title><link href="http://jfbercher.github.io/blog/2014/08/12/r%C3%A9sum%C3%A9%20de%20la%20chose/" rel="alternate"></link><updated>2014-08-12T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-08-12:blog/2014/08/12/résumé de la chose/</id><summary type="html">&lt;p&gt;&lt;div class="videobox"&gt;
+            &lt;video width="720" height="480" preload="none" controls poster="http://site.com/poster-frame.jpg"&gt;&lt;source src='http://site.com/video.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'&gt;&lt;/video&gt;&lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>Hamming_code</title><link href="http://jfbercher.github.io/blog/2014/06/15/This%20is%20a%20simple%20program%20for%20illustrating%20Hamming%20(7,4)%20coding/" rel="alternate"></link><updated>2014-06-15T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-06-15:blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/</id><summary type="html">&lt;p&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="hamming-74-coding"&gt;Hamming (7,4) coding&lt;/h1&gt;
+&lt;p&gt;A colleague of mine asked me about a simple demonstration of &lt;a href="http://en.wikipedia.org/wiki/Hamming_code"&gt;Hamming code&lt;/a&gt;. It is inspired by &lt;a href="http://lionel.textmalaysia.com/hamming-code-in-python.html"&gt;this link&lt;/a&gt;, but unfortunately the code is not available anymore. Below is what I did.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="two-utilitary-functions"&gt;Two utilitary functions&lt;/h2&gt;
+&lt;p&gt;For encoding and decoding to and from binary number representations&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[2]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;randint&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -53,17 +159,18 @@ In&amp;nbsp;[2]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre class="ipynb"&gt;Number 5 converted into binary: [[0 1 0 1]]
+&lt;pre&gt;
+Number 5 converted into binary: [[0 1 0 1]]
 And back to a decimal number: 5
+
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -72,21 +179,14 @@ And back to a decimal number: 5
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;h2 id="hamming74-codec"&gt;Hamming(7,4) Codec&lt;/h2&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[27]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;#Method to encode message&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -127,25 +227,18 @@ In&amp;nbsp;[27]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;h2 id="a-test"&gt;A test&lt;/h2&gt;
+&lt;p&gt;And finally a test of encoding-decoding with some corruptions of the message.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[28]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hamm_tst&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     
@@ -174,16 +267,16 @@ In&amp;nbsp;[28]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre class="ipynb"&gt;Please input a number in [0,15] 9
+&lt;pre&gt;
+Please input a number in [0,15] 9
 binary number:  0b1001
 encoded version:  [[1 0 0 1 1 0 0]]
 Syndrom:  0
@@ -195,6 +288,7 @@ new message  [[1 0 1 1 1 0 0]]
 Syndrom:  3
 decoded version:  [[1 0 0 1 1 0 0]]
 The End
+
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -203,21 +297,15 @@ The End
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;h2 id="an-object-oriented-version"&gt;An object-oriented version&lt;/h2&gt;
+&lt;p&gt;Let us now design an object 'Hamming codec'.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[29]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Hamming_codec&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -244,16 +332,14 @@ In&amp;nbsp;[29]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[30]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Hamming_codec&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;1101&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -264,22 +350,23 @@ In&amp;nbsp;[30]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre class="ipynb"&gt;Code:  [[1 1 0 1 0 0 1]]
+&lt;pre&gt;
+Code:  [[1 1 0 1 0 0 1]]
 Syndrom:  0
 Decoded value:  [[1 1 0 1 0 0 1]]
 
 And now introduce an error...
 Syndrom:  6
 Decoded value:  [[1 1 0 1 0 0 1]]
+
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -288,28 +375,27 @@ Decoded value:  [[1 1 0 1 0 0 1]]
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[33]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
     Out[33]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
-&lt;div class="output_html rendered_html output_subarea output_pyout"&gt;
+&lt;div class="output_html rendered_html"&gt;
 
     &lt;small&gt;
     &lt;p&gt; This post was written as an IPython notebook.  It is available for
@@ -332,29 +418,203 @@ In&amp;nbsp;[33]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-
-&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>Publishing on Github</title><link href="http://jfbercher.github.io/blog/2014/05/21/This%20is%20the%20second%20post/" rel="alternate"></link><updated>2014-05-21T23:48:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-05-21:blog/2014/05/21/This is the second post/</id><summary type="html">&lt;p&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
-&lt;div class="inner_cell"&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>Convert between matrices and arrays</title><link href="http://jfbercher.github.io/blog/2014/06/12/When%20using%20numpy,%20it%20is%20sometimes%20useful%20to%20do%20part%20of%20calculations%20using%20matrices%20rather%20than%20arrays./" rel="alternate"></link><updated>2014-06-12T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-06-12:blog/2014/06/12/When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays./</id><summary type="html">&lt;p&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="converting-between-arrays-and-matrices"&gt;Converting between arrays and matrices&lt;/h2&gt;
+&lt;p&gt;When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays. Thus it is interesting to be able to convert between the two types. This is easily done as follows, where we use the * operator in functions definitions. This enables to pass a variable number of parameters (in a form of an implicit lists, which is unpacked implicitely then after).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[1]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;tomat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Converts the list of arrays in *Z to matrices&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;Out&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;iter&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;Out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Out&lt;/span&gt;
+    
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;toarray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Converts the list of matrices in *Z to arrays&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;Out&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;iter&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;Out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Out&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;A test:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[2]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tomat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;toarray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="c"&gt;#&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tomat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
+
+
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre&gt;
+&amp;lt;class &amp;apos;numpy.matrixlib.defmatrix.matrix&amp;apos;&amp;gt;
+&amp;lt;class &amp;apos;numpy.ndarray&amp;apos;&amp;gt;
+&amp;lt;class &amp;apos;numpy.matrixlib.defmatrix.matrix&amp;apos;&amp;gt;
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;A possible use is for situations like this: given two colomns vectors &lt;span class="math"&gt;\(x\)&lt;/span&gt; and &lt;span class="math"&gt;\(y\)&lt;/span&gt; and a matrix &lt;span class="math"&gt;\(A\)&lt;/span&gt;, compute &lt;span class="math"&gt;\[z=x^T A y\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[11]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;# These are all arrays&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Type of x: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c"&gt;# The expression computed using array&amp;#39;s dot products:&lt;/span&gt;
+&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;# And computed using classical matrix notations&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tomat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Shape of x: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;zz&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zz&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
+
+
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre&gt;
+Type of x:  &amp;lt;class &amp;apos;numpy.ndarray&amp;apos;&amp;gt;
+19.6823406445
+(1, 10)
+[[ 19.68234064]]
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;A script file 'tofromatarray.py' is available &lt;a href="./downloads/code/tofromatarray.py"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In&amp;nbsp;[1]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
+
+
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[1]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+&lt;div class="output_html rendered_html"&gt;
+
+    &lt;small&gt;
+    &lt;p&gt; This post was written as an IPython notebook.  It is available for
+    &lt;a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Convert_between_matrices_and_arrays.ipynb"&gt;download&lt;/a&gt; or as a static
+    &lt;a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Convert_between_matrices_and_arrays.ipynb"&gt;html&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"&gt;&lt;img
+    alt="Creative Commons License" style="border-width:0"
+    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /&gt;&lt;/a&gt;&lt;br /&gt;&lt;span
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title"&gt;jfblog&lt;/span&gt; by &lt;a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL"&gt;J.-F. Bercher&lt;/a&gt; is
+    licensed under a &lt;a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/"&gt;Creative Commons
+    Attribution-ShareAlike 4.0 International License&lt;/a&gt;.&lt;br /&gt;Based on a work at &lt;a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source"&gt;http://jfbercher.github.io/&lt;/a&gt;.
+        
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>Publishing on Github</title><link href="http://jfbercher.github.io/blog/2014/05/22/This%20is%20the%20second%20post/" rel="alternate"></link><updated>2014-05-22T23:48:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-05-22:blog/2014/05/22/This is the second post/</id><summary type="html">&lt;p&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The first thing to do is to create an account on &lt;a href="http://pages.github.com/"&gt;Github pages&lt;/a&gt; and then follow the directions. This drives to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create a repository, say &lt;code&gt;repo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;and then create a &lt;code&gt;gh-pages&lt;/code&gt; branch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;then the content will be available (after a few minutes) in http://username.github.io/repo/&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The point is that you will have to publish your materials on gh-pages branch.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Here follows the &lt;code&gt;mydeploy&lt;/code&gt; section of my Makefile that I used for that purpose:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-weight: bold;"&gt;Expand Code&lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;mydeploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;mydeploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt;
 	   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;my_build&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
 	   &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; (_build directory exists)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
 	   &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;my_build&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
@@ -375,26 +635,17 @@ In&amp;nbsp;[]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;p&gt;However, though it seems not said in the recent docs, it is also possible to create a repository with the very same name as user github address; that is for the the http address &lt;code&gt;username.github.io&lt;/code&gt;, create a repository &lt;code&gt;username.github.io&lt;/code&gt;. In such a case, files pushed to this repository will be available implicitely, and directly at &lt;code&gt;http://username.github.io&lt;/code&gt;. In such a case, it is possible to employ the original Makefile's code:&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[]:
 &lt;/div&gt;
-
-&lt;div class="collapseheader box-flex1"&gt;&lt;span style="font-weight: bold;"&gt;Expand Code&lt;/span&gt;
-&lt;div class="input_area box-flex1" style="display:none"&gt;
-&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="c"&gt;# &amp;lt;!-- collapse=True --&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;publish&lt;/span&gt;
 	&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;_build&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
 	&lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; (_build directory exists)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
 	&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="n"&gt;_build&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; \
@@ -414,30 +665,27 @@ In&amp;nbsp;[]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[1]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
     Out[1]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
-&lt;div class="output_html rendered_html output_subarea output_pyout"&gt;
+&lt;div class="output_html rendered_html"&gt;
 
     &lt;small&gt;
     &lt;p&gt; This post was written as an IPython notebook.  It is available for
@@ -460,42 +708,38 @@ In&amp;nbsp;[1]:
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category></entry><entry><title>This is the second post</title><link href="http://jfbercher.github.io/blog/2014/05/20/This%20is%20the%20second%20post/" rel="alternate"></link><updated>2014-05-20T22:12:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-05-20:blog/2014/05/20/This is the second post/</id><summary type="html">&lt;p&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;p&gt;&lt;span class="math"&gt;\[
+\sum_{i=1}^N \alpha_i x_i^p
+\]&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[3]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
     Out[3]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
-&lt;div class="output_html rendered_html output_subarea output_pyout"&gt;
+&lt;div class="output_html rendered_html"&gt;
 
     &lt;small&gt;
     &lt;p&gt; This post was written as an IPython notebook.  It is available for
@@ -518,26 +762,20 @@ In&amp;nbsp;[3]:
 &lt;/div&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;&lt;/p&gt;</summary><category term="misc"></category><category term="post"></category><category term="ipython"></category></entry><entry><title>The very first post</title><link href="http://jfbercher.github.io/blog/2014/05/01/the%20slug%20of%20the%20thing/" rel="alternate"></link><updated>2014-05-01T23:05:00+02:00</updated><author><name>J.-F. Bercher</name></author><id>tag:jfbercher.github.io,2014-05-01:blog/2014/05/01/the slug of the thing/</id><summary type="html">&lt;p&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
+&lt;p&gt;This is a text that describes that I am doing. First, I launch the &lt;code&gt;pylab&lt;/code&gt; magic, with inline graphics.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[2]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;pylab&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -545,32 +783,37 @@ In&amp;nbsp;[2]:
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre class="ipynb"&gt;Populating the interactive namespace from numpy and matplotlib
+&lt;pre&gt;
+Populating the interactive namespace from numpy and matplotlib
+
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
     Out[2]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
 
-&lt;pre class="ipynb"&gt;[&amp;lt;matplotlib.lines.Line2D at 0x7f093d3d7110&amp;gt;]&lt;/pre&gt;
+&lt;pre&gt;
+[&amp;lt;matplotlib.lines.Line2D at 0x7f093d3d7110&amp;gt;]
+&lt;/pre&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_display_data"&gt;
 
 
-&lt;div class="output_png output_subarea "&gt;
 &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXYAAAEACAYAAACnJV25AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXl0HNWZ9p/WLlne9xVsI1uWbbAJxIEAkWEMwxoWhwAz
 JCFkOxxykhlOMpNk8gXmDBiSmTAwSSaZBBgSJsAkM2RySBBrxG6WyAbiJTa2RWR5w4u8SuqWVN8f
@@ -885,38 +1128,36 @@ ZzU1NVkrVqywDhw4UOpdjZX29nbr0ksvtSzLGrbHYu3atdZpp51mnXzyydYVV1xh9fT0DNtjcddd
 d1ktLS3WokWLrE984hNWNpsdNsfimmuusaZOnWpVV1dbM2bMsO6//37P93777bdbc+fOtebPn2+1
 tbX5bp8HKDEMw6QMXvOUYRgmZbCwMwzDpAwWdoZhmJTBws4wDJMyWNgZhmFSBgs7wzBMymBhZxiG
 SRks7AzDMCnj/wNN3o26OBFCMgAAAABJRU5ErkJggg==
-"
-&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
+"&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="input hbox"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In&amp;nbsp;[1]:
 &lt;/div&gt;
-
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight-ipynb"&gt;&lt;pre class="ipynb"&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;the_end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theNotebook&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="vbox output_wrapper"&gt;
+&lt;div class="output vbox"&gt;
 
 
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+&lt;div class="hbox output_area"&gt;&lt;div class="prompt output_prompt"&gt;
     Out[1]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
-&lt;div class="output_html rendered_html output_subarea output_pyout"&gt;
+&lt;div class="output_html rendered_html"&gt;
 
     &lt;small&gt;
     &lt;p&gt; This post was written as an IPython notebook.  It is available for
@@ -938,6 +1179,7 @@ In&amp;nbsp;[1]:
         
 &lt;/div&gt;
 
+&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
