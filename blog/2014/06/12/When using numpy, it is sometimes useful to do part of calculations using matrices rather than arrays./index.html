@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>jfblog - post</title>
+  <title>Convert between matrices and arrays</title>
   <meta name="author" content="J.-F. Bercher">
 
   <link href="http://jfbercher.github.io//atom.xml" type="application/atom+xml" rel="alternate"
@@ -1750,13 +1750,11 @@ jQuery(document).ready(function($) {
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
+<div>
+  <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">
-        <a href="http://jfbercher.github.io/blog/2014/05/20/This is the second post/">This is the second post</a>
-      </h1>
-      <p class="meta"><time datetime="2014-05-20T22:12:00" pubdate>mai 20, 2014</time></p>
+      <h1 class="entry-title">Convert between matrices and arrays</h1>
+      <p class="meta"><time datetime="2014-06-12T22:12:00" pubdate>juin 12, 2014</time></p>
 </header>
 
   <div class="entry-content"><p>
@@ -1772,7 +1770,147 @@ jQuery(document).ready(function($) {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In&nbsp;[1]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">tomat</span><span class="p">(</span><span class="o">*</span><span class="n">Z</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts the list of arrays in *Z to matrices&quot;&quot;&quot;</span>
+    <span class="n">Out</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="n">Z</span><span class="p">:</span>
+        <span class="nb">iter</span><span class="o">=</span><span class="n">mat</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+        <span class="n">Out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Out</span>
+    
+<span class="k">def</span> <span class="nf">toarray</span><span class="p">(</span><span class="o">*</span><span class="n">Z</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts the list of matrices in *Z to arrays&quot;&quot;&quot;</span>
+    <span class="n">Out</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="n">Z</span><span class="p">:</span>
+        <span class="nb">iter</span><span class="o">=</span><span class="n">array</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+        <span class="n">Out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Out</span>  
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[2]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb">    <span class="n">A</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">B</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">D</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="o">=</span><span class="n">tomat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+    <span class="n">G</span><span class="p">,</span><span class="n">H</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="n">toarray</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+    <span class="c">#</span>
+    <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="n">tomat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">&lt;class &apos;numpy.matrixlib.defmatrix.matrix&apos;&gt;
+&lt;class &apos;numpy.ndarray&apos;&gt;
+&lt;class &apos;numpy.matrixlib.defmatrix.matrix&apos;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[11]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">x</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">A</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="c"># These are all arrays</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Type of x: &quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="c"># The expression computed using array&#39;s dot products:</span>
+<span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="c"># And computed using classical matrix notations</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">tomat</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Shape of x: &quot;</span><span class="p">,</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">zz</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">T</span>
+<span class="k">print</span><span class="p">(</span><span class="n">zz</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Type of x:  &lt;class &apos;numpy.ndarray&apos;&gt;
+19.6823406445
+(1, 10)
+[[ 19.68234064]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[1]:
 </div>
 
 <div class="input_area box-flex1">
@@ -1788,31 +1926,69 @@ In&nbsp;[3]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[3]:</div>
+    Out[1]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
 
     <small>
     <p> This post was written as an IPython notebook.  It is available for
-    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Second_blog_post.ipynb">download</a> or as a static
-    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Second_blog_post.ipynb">html</a>.</p>
+    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Convert_between_matrices_and_arrays.ipynb">download</a> or as a static
+    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Convert_between_matrices_and_arrays.ipynb">html</a>.</p>
     <p></p>
     <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
     alt="Creative Commons License" style="border-width:0"
     src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
-    xmlns:dct="http://purl.org ...</small></div></div></div></div></div></p></div>
-  <footer>
-    <a rel="full-article" href="http://jfbercher.github.io/blog/2014/05/20/This is the second post/">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title">jfblog</span> by <a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL">J.-F. Bercher</a> is
+    licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+    Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source">http://jfbercher.github.io/</a>.
+        
+</div>
 
-  <br />
-</div></div>
+</div>
+
+</div>
+</div>
+
+</div></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">J.-F. Bercher</span>
+  </span>
+<time datetime="2014-06-12T22:12:00" pubdate>juin 12, 2014</time>  <span class="categories">
+    <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/08/12/le résumé de la chose/">test</a>
+      </li>
+      <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Hamming_code</a>
+      </li>
+      <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/06/12/When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays./">Convert between matrices and arrays</a>
+      </li>
+      <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/05/21/This is the second post/">Publishing on Github</a>
+      </li>
       <li class="post">
           <a href="http://jfbercher.github.io/blog/2014/05/20/This is the second post/">This is the second post</a>
       </li>
@@ -1846,6 +2022,9 @@ In&nbsp;[3]:
 </p></footer>
 	<script type="text/javascript">
 	  var disqus_shortname = 'jfb-log';
+          var disqus_identifier = '/blog/2014/06/12/When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays./';
+          var disqus_url = 'http://jfbercher.github.io/blog/2014/06/12/When using numpy, it is sometimes useful to do part of calculations using matrices rather than arrays./';
+          var disqus_title = 'Convert between matrices and arrays';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
