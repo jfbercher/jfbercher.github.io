@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>jfblog Archive </title>
+  <title>Hamming_code</title>
   <meta name="author" content="J.-F. Bercher">
 
   <link href="http://jfbercher.github.io//atom.xml" type="application/atom+xml" rel="alternate"
@@ -1751,71 +1751,366 @@ jQuery(document).ready(function($) {
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Archive</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Hamming_code</h1>
+      <p class="meta"><time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time></p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2014</h2>
-                    <article>
-                        <h1><a href="blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Hamming_code</a></h1>
-                        <time datetime="2014-06-15 22:12:00" pubdate>
-                            <span class="month">jui</span>
-                            <span class="day">15</span>
-                            <span class="year">2014</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="blog/2014/05/21/This is the second post/">Publishing on Github</a></h1>
-                        <time datetime="2014-05-21 23:48:00" pubdate>
-                            <span class="month">mai</span>
-                            <span class="day">21</span>
-                            <span class="year">2014</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="blog/2014/05/20/This is the second post/">This is the second post</a></h1>
-                        <time datetime="2014-05-20 22:12:00" pubdate>
-                            <span class="month">mai</span>
-                            <span class="day">20</span>
-                            <span class="year">2014</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="blog/2014/05/01/the slug of the thing/">The very first post</a></h1>
-                        <time datetime="2014-05-01 23:05:00" pubdate>
-                            <span class="month">mai</span>
-                            <span class="day">01</span>
-                            <span class="year">2014</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/misc.html'>misc</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
-    </article>
+  <div class="entry-content"><p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[2]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="c"># We begin with two utilitary functions</span>
+<span class="k">def</span> <span class="nf">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c">#This converts a decimal number into a matrix of (int) bits</span>
+    <span class="n">ll</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">&quot;{0:04b}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="c">#.format give a string which is converted to a list</span>
+    <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ll</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span> <span class="c"># return a matrix</span>
+
+<span class="k">def</span> <span class="nf">binmat2dec</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="c">#This converts a matrix of (int) bits into a decimal number </span>
+    <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># convert to list</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">l</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">+=</span><span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="c"># examples</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">m</span><span class="o">=</span><span class="n">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Number {} converted into binary: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+<span class="n">nn</span><span class="o">=</span><span class="n">binmat2dec</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;And back to a decimal number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nn</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Number 5 converted into binary: [[0 1 0 1]]
+And back to a decimal number: 5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[27]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#Method to encode message</span>
+<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="c"># message: binary string representation of the (int) number</span>
+      
+    <span class="n">message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="c">#print(message)</span>
+    
+    <span class="c">#Hamming (7,4) generating matrix to encode the message</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="c">#Multiply the message with the matrix to encode the message with module 2</span>
+    <span class="k">return</span> <span class="p">(</span> <span class="n">message</span> <span class="o">*</span> <span class="n">g</span> <span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+
+<span class="c">#Method to decode message</span>
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+     
+    <span class="c">#Matrix to decode the message</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="c">#Multiply the message with the matrix to verify the message with module 2</span>
+    <span class="c">#This is the syndrom</span>
+    <span class="n">hy</span> <span class="o">=</span> <span class="p">(</span> <span class="n">h</span> <span class="o">*</span> <span class="n">message</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="o">%</span> <span class="mi">2</span>  <span class="c">#%2 is the modulo 2 operation</span>
+    
+    <span class="c">#Get the integer value of the binary as result of the previous operation</span>
+    <span class="c">#print(hy)</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">binmat2dec</span><span class="p">(</span><span class="n">hy</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Syndrom: &quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+    <span class="c">#print(s)</span>
+    <span class="c"># the syndrom gives the bit number. </span>
+    <span class="c">#Since indexes begin at 0 there is a shift of one</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span><span class="k">2</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[28]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">hamm_tst</span><span class="p">():</span>
+    
+    <span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;Please input a number in [0,15] &#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">15</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;n must be between 0 and 15&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;binary number: &#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">b</span><span class="o">=</span><span class="n">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">enc</span><span class="o">=</span><span class="n">encode</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;encoded version: &#39;</span><span class="p">,</span> <span class="n">enc</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;decoded version: &#39;</span><span class="p">,</span> <span class="n">decode</span><span class="p">(</span><span class="n">enc</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;let us add a random error: &#39;</span><span class="p">)</span>
+    <span class="n">noise</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c"># change one bit among 7 possible</span>
+    <span class="n">newenc</span><span class="o">=</span><span class="n">enc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">newenc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">noise</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">newenc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">noise</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span><span class="k">2</span>
+    <span class="n">nb</span><span class="o">=</span><span class="n">noise</span><span class="o">+</span><span class="mi">1</span>        
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;bit number </span><span class="si">%d</span><span class="s"> is changed: &#39;</span> <span class="o">%</span> <span class="n">nb</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;new message &quot;</span><span class="p">,</span><span class="n">newenc</span><span class="p">)</span>
+   
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;decoded version: &#39;</span><span class="p">,</span> <span class="n">decode</span><span class="p">(</span><span class="n">newenc</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;The End&#39;</span><span class="p">)</span>
+    
+<span class="n">hamm_tst</span><span class="p">()</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Please input a number in [0,15] 9
+binary number:  0b1001
+encoded version:  [[1 0 0 1 1 0 0]]
+Syndrom:  0
+decoded version:  (0, matrix([[1, 0, 0, 1, 1, 0, 0]]))
+....................
+let us add a random error: 
+bit number 3 is changed: 
+new message  [[1 0 1 1 1 0 0]]
+Syndrom:  3
+decoded version:  [[1 0 0 1 1 0 0]]
+The End
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[29]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Hamming_codec</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">indata</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">indata</span><span class="p">:</span>
+            <span class="n">indata</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">indata</span><span class="p">)</span>
+            <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">indata</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> 
+    <span class="k">def</span> <span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">incode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">=</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Code: &quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">incode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  
+         <span class="k">if</span> <span class="n">incode</span><span class="p">:</span>
+            <span class="n">indata</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">incode</span><span class="p">)</span>
+            <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">indata</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
+         <span class="n">r</span><span class="o">=</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+         <span class="k">print</span><span class="p">(</span><span class="s">&quot;Decoded value: &quot;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+        
+</pre></div>
+
+</div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[30]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">t</span><span class="o">=</span><span class="n">Hamming_codec</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s">&#39;1101&#39;</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">code</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">And now introduce an error...&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;1101011&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre class="ipynb">Code:  [[1 1 0 1 0 0 1]]
+Syndrom:  0
+Decoded value:  [[1 1 0 1 0 0 1]]
+
+And now introduce an error...
+Syndrom:  6
+Decoded value:  [[1 1 0 1 0 0 1]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[33]:
+</div>
+
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[33]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+
+    <small>
+    <p> This post was written as an IPython notebook.  It is available for
+    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Hamming_code.ipynb">download</a> or as a static
+    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Hamming_code.ipynb">html</a>.</p>
+    <p></p>
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+    alt="Creative Commons License" style="border-width:0"
+    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title">jfblog</span> by <a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL">J.-F. Bercher</a> is
+    licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+    Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source">http://jfbercher.github.io/</a>.
+        
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">J.-F. Bercher</span>
+  </span>
+<time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time>  <span class="categories">
+    <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
 </div>
 <aside class="sidebar">
   <section>
@@ -1863,6 +2158,9 @@ jQuery(document).ready(function($) {
 </p></footer>
 	<script type="text/javascript">
 	  var disqus_shortname = 'jfb-log';
+          var disqus_identifier = '/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/';
+          var disqus_url = 'http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/';
+          var disqus_title = 'Hamming_code';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

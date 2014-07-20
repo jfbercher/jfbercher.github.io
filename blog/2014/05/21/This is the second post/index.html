@@ -1763,14 +1763,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The first thing to do is to create an account on <a href="http://pages.github.com/">Github pages</a> and then follow the directions. This drives to </p>
-<ul>
-<li>create a repository, say <code>repo</code></li>
-<li>and then create a <code>gh-pages</code> branch</li>
-</ul>
-<p>then the content will be available (after a few minutes) in <a href="http://username.github.io/repo/">http://username.github.io/repo/</a> </p>
-<p><em>The point is that you will have to publish your materials on gh-pages branch.</em></p>
-<p>Here follows the <code>mydeploy</code> section of my Makefile that I used for that purpose:</p>
+
 </div>
 </div>
 </div>
@@ -1810,7 +1803,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>However, though it seems not sait in the recent docs, it is also possible to create a repository with the very same name as user github address; that is for the the http address <code>username.github.io</code>, create a repository <code>username.github.io</code>. In such a case, files pushed to this repository will be available implicitely, and directly at <code>http://username.github.io</code>. In such a case, it is possible to employ the original Makefile&#39;s code:</p>
+
 </div>
 </div>
 </div>
@@ -1835,6 +1828,7 @@ In&nbsp;[]:
 	<span class="n">rsync</span> <span class="o">-</span><span class="n">r</span> <span class="err">$</span><span class="p">(</span><span class="n">OUTPUTDIR</span><span class="p">)</span><span class="o">/*</span> <span class="n">_build</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">)</span><span class="o">/</span>
 	<span class="n">cd</span> <span class="n">_build</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">add</span> <span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s">&quot;make deploy&quot;</span>
 	<span class="n">cd</span> <span class="n">_build</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">DEPLOYREPOSITORY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+    
 </pre></div>
 
 </div>
@@ -1914,6 +1908,9 @@ In&nbsp;[1]:
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Hamming_code</a>
+      </li>
+      <li class="post">
           <a href="http://jfbercher.github.io/blog/2014/05/21/This is the second post/">Publishing on Github</a>
       </li>
       <li class="post">
@@ -1925,10 +1922,9 @@ In&nbsp;[1]:
     </ul>
   </section>
  
-
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>  </section>
+    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>,    <a href="http://jfbercher.github.io/tag/post.html">post</a>,    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>  </section>
 
 
     <section>
@@ -1941,6 +1937,7 @@ In&nbsp;[1]:
             <li><a href="https://statcompute.wordpress.com/tag/python-2/" target="_blank">Stat Compute</a></li>
             <li><a href="http://blog.yhathq.com/" target="_blank">yhat</a></li>
             <li><a href="http://www.camdp.com/" target="_blank">Bayesian Methods for Hackers</a></li>
+            <li><a href="http://wesmckinney.com/blog/" target="_blank">Wes McKinneys Blog</a></li>
         </ul>
     </section>
 
