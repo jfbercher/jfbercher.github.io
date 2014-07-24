@@ -1275,6 +1275,24 @@ jQuery(document).ready(function($) {
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="http://jfbercher.github.io/blog/2014/07/02/Convert xls files to csv/">Convert xls files to csv</a>
+      </h1>
+      <p class="meta"><time datetime="2014-07-02T22:12:00" pubdate>juil. 02, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I had to convert a bunch of xlsx files to csv. A simple solution is obtained thanks to the libraries in http://www.python-excel.org/. More specifically, I only had to use <code>xlrd</code>. It is as simple as</p>
+<pre class="sourceCode python"><code class="sourceCode python">wb = xlrd.open_workbook(<span class="dt">file</span>)
+sh = wb.sheet_by_name(<span class="st">&#39;Sheet1&#39;</span>)</code></pre>
+<p>Now the <code>sh</code> object ...</p></div></p></div>
+  <footer>
+    <a rel="full-article" href="http://jfbercher.github.io/blog/2014/07/02/Convert xls files to csv/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Hamming_code</a>
       </h1>
       <p class="meta"><time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time></p>
@@ -1403,6 +1421,9 @@ Populating the interactive namespace from numpy and matplotlib
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://jfbercher.github.io/blog/2014/07/02/Convert xls files to csv/">Convert xls files to csv</a>
+      </li>
+      <li class="post">
           <a href="http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/">Hamming_code</a>
       </li>
       <li class="post">
@@ -1419,7 +1440,7 @@ Populating the interactive namespace from numpy and matplotlib
  
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
+    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/xls.html">xls</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
 
 
     <section>

@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hamming_code</title>
+  <title>Convert xls files to csv</title>
   <meta name="author" content="J.-F. Bercher">
 
   <link href="http://jfbercher.github.io//atom.xml" type="application/atom+xml" rel="alternate"
@@ -1274,50 +1274,76 @@ jQuery(document).ready(function($) {
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">Hamming_code</h1>
-      <p class="meta"><time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time></p>
+      <h1 class="entry-title">Convert xls files to csv</h1>
+      <p class="meta"><time datetime="2014-07-02T22:12:00" pubdate>juil. 02, 2014</time></p>
 </header>
 
   <div class="entry-content"><p>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="hamming-74-coding">Hamming (7,4) coding</h1>
-<p>A colleague of mine asked me about a simple demonstration of <a href="http://en.wikipedia.org/wiki/Hamming_code">Hamming code</a>. It is inspired by <a href="http://lionel.textmalaysia.com/hamming-code-in-python.html">this link</a>, but unfortunately the code is not available anymore. Below is what I did.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="two-utilitary-functions">Two utilitary functions</h2>
-<p>For encoding and decoding to and from binary number representations</p>
+<p>I had to convert a bunch of xlsx files to csv. A simple solution is obtained thanks to the libraries in http://www.python-excel.org/. More specifically, I only had to use <code>xlrd</code>. It is as simple as</p>
+<pre class="sourceCode python"><code class="sourceCode python">wb = xlrd.open_workbook(<span class="dt">file</span>)
+sh = wb.sheet_by_name(<span class="st">&#39;Sheet1&#39;</span>)</code></pre>
+<p>Now the <code>sh</code> object contains the first sheet and we can use methods to read the content. The rest of the work consists in opening a new file for writing and do the actual writing, thanks to the <code>csv</code> library. I also use the argparse library to parse scripts arguments.</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In&nbsp;[71]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">xls2csv</span><span class="o">.</span><span class="n">py</span> 
+<span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c"># We begin with two utilitary functions</span>
-<span class="k">def</span> <span class="nf">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="c">#This converts a decimal number into a matrix of (int) bits</span>
-    <span class="n">ll</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">&quot;{0:04b}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="c">#.format give a string which is converted to a list</span>
-    <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ll</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span> <span class="c"># return a matrix</span>
+<span class="k">def</span> <span class="nf">csv_from_excel</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
 
-<span class="k">def</span> <span class="nf">binmat2dec</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="c">#This converts a matrix of (int) bits into a decimal number </span>
-    <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># convert to list</span>
-    <span class="n">s</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">l</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="n">s</span><span class="o">+=</span><span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">s</span>
+    <span class="n">wb</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="n">sheets</span><span class="o">=</span><span class="n">wb</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
+    <span class="n">sh</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">sheets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+              
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xlsx&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xlsx&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="n">wr</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">your_csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span><span class="p">)</span>
 
-<span class="c"># examples</span>
-<span class="n">n</span><span class="o">=</span><span class="mi">5</span>
-<span class="n">m</span><span class="o">=</span><span class="n">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;Number {} converted into binary: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
-<span class="n">nn</span><span class="o">=</span><span class="n">binmat2dec</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;And back to a decimal number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nn</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">rownum</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">nrows</span><span class="p">):</span>
+        <span class="n">wr</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">row_values</span><span class="p">(</span><span class="n">rownum</span><span class="p">))</span>
+
+    <span class="n">your_csv_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+	
+
+<span class="n">verbose</span><span class="o">=</span><span class="bp">True</span>    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>	
+    <span class="kn">import</span> <span class="nn">argparse</span>
+
+    <span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program converts a series of xls[x] files into csv.&quot;</span>
+    <span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB 2014&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+    <span class="c"># mandatory argument</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="n">help</span> <span class="o">=</span> <span class="s">&#39;List of files to convert (accepts regular expressions)&#39;</span><span class="p">,</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;argfiles&#39;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s">&#39;*.xls*&#39;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span>  <span class="n">nargs</span> <span class="o">=</span> <span class="s">&#39;*&#39;</span><span class="p">)</span>
+    <span class="c"># verbosity flag</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-v&#39;</span><span class="p">,</span><span class="s">&#39;--verbose&#39;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>   <span class="c">#action=&#39;store_true&#39;</span>
+    <span class="n">action</span><span class="o">=</span><span class="s">&#39;count&#39;</span><span class="p">)</span>
+
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="n">arguments</span><span class="o">.</span><span class="n">verbose</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">&quot;script arg: &quot;</span><span class="p">,</span> <span class="n">arguments</span><span class="o">.</span><span class="n">argfiles</span><span class="p">)</span>
+    <span class="n">xlsx_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">argfiles</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">&quot;glog.glog expansion: &quot;</span><span class="p">,</span> <span class="n">xlsx_files</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xlsx_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;No XLSX files to convert.&#39;</span><span class="p">)</span>
+          
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">xlsx_files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Converting {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+        <span class="n">csv_from_excel</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1330,8 +1356,7 @@ In&nbsp;[2]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-Number 5 converted into binary: [[0 1 0 1]]
-And back to a decimal number: 5
+Overwriting xls2csv.py
 
 </pre>
 </div>
@@ -1342,90 +1367,15 @@ And back to a decimal number: 5
 
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="hamming74-codec">Hamming(7,4) Codec</h2>
+<p>And now let us test it:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[27]:
+In&nbsp;[63]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#Method to encode message</span>
-<span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-    <span class="c"># message: binary string representation of the (int) number</span>
-      
-    <span class="n">message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-    <span class="c">#print(message)</span>
-    
-    <span class="c">#Hamming (7,4) generating matrix to encode the message</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-    <span class="c">#Multiply the message with the matrix to encode the message with module 2</span>
-    <span class="k">return</span> <span class="p">(</span> <span class="n">message</span> <span class="o">*</span> <span class="n">g</span> <span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
-
-<span class="c">#Method to decode message</span>
-<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-     
-    <span class="c">#Matrix to decode the message</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-    <span class="c">#Multiply the message with the matrix to verify the message with module 2</span>
-    <span class="c">#This is the syndrom</span>
-    <span class="n">hy</span> <span class="o">=</span> <span class="p">(</span> <span class="n">h</span> <span class="o">*</span> <span class="n">message</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="o">%</span> <span class="mi">2</span>  <span class="c">#%2 is the modulo 2 operation</span>
-    
-    <span class="c">#Get the integer value of the binary as result of the previous operation</span>
-    <span class="c">#print(hy)</span>
-    <span class="n">s</span><span class="o">=</span><span class="n">binmat2dec</span><span class="p">(</span><span class="n">hy</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Syndrom: &quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
-    <span class="c">#print(s)</span>
-    <span class="c"># the syndrom gives the bit number. </span>
-    <span class="c">#Since indexes begin at 0 there is a shift of one</span>
-    <span class="k">if</span> <span class="n">s</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span><span class="k">2</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">message</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="a-test">A test</h2>
-<p>And finally a test of encoding-decoding with some corruptions of the message.</p>
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[28]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">def</span> <span class="nf">hamm_tst</span><span class="p">():</span>
-    
-    <span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;Please input a number in [0,15] &#39;</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">15</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;n must be between 0 and 15&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;binary number: &#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">)</span>
-    <span class="n">b</span><span class="o">=</span><span class="n">dec2binmat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">enc</span><span class="o">=</span><span class="n">encode</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;encoded version: &#39;</span><span class="p">,</span> <span class="n">enc</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;decoded version: &#39;</span><span class="p">,</span> <span class="n">decode</span><span class="p">(</span><span class="n">enc</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;let us add a random error: &#39;</span><span class="p">)</span>
-    <span class="n">noise</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c"># change one bit among 7 possible</span>
-    <span class="n">newenc</span><span class="o">=</span><span class="n">enc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">newenc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">noise</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">newenc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">noise</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span><span class="k">2</span>
-    <span class="n">nb</span><span class="o">=</span><span class="n">noise</span><span class="o">+</span><span class="mi">1</span>        
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;bit number </span><span class="si">%d</span><span class="s"> is changed: &#39;</span> <span class="o">%</span> <span class="n">nb</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;new message &quot;</span><span class="p">,</span><span class="n">newenc</span><span class="p">)</span>
-   
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;decoded version: &#39;</span><span class="p">,</span> <span class="n">decode</span><span class="p">(</span><span class="n">newenc</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&#39;The End&#39;</span><span class="p">)</span>
-    
-<span class="n">hamm_tst</span><span class="p">()</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="n">Notes</span><span class="o">*.</span><span class="n">xls</span>
 </pre></div>
 
 </div>
@@ -1438,18 +1388,11 @@ In&nbsp;[28]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-Please input a number in [0,15] 9
-binary number:  0b1001
-encoded version:  [[1 0 0 1 1 0 0]]
-Syndrom:  0
-decoded version:  (0, matrix([[1, 0, 0, 1, 1, 0, 0]]))
-....................
-let us add a random error: 
-bit number 3 is changed: 
-new message  [[1 0 1 1 1 0 0]]
-Syndrom:  3
-decoded version:  [[1 0 0 1 1 0 0]]
-The End
+NotesB1ST02-ISBS1-2012.xls
+NotesB2ST02-ISBS2-2013-14.xls
+NotesB2ST12- AdaEtClassif-ISBS2-2013-14 (1).xls
+NotesB2ST12- AdaEtClassif-ISBS2-2013-14.xls
+NotesB2ST12-ISBS2-2013-14.xls
 
 </pre>
 </div>
@@ -1459,56 +1402,13 @@ The End
 </div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="an-object-oriented-version">An object-oriented version</h2>
-<p>Let us now design an object 'Hamming codec'.</p>
-</div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[29]:
+In&nbsp;[74]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="k">class</span> <span class="nc">Hamming_codec</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
-    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">indata</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">indata</span><span class="p">:</span>
-            <span class="n">indata</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">indata</span><span class="p">)</span>
-            <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">indata</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-           <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> 
-    <span class="k">def</span> <span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">incode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">=</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indata</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Code: &quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">incode</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  
-         <span class="k">if</span> <span class="n">incode</span><span class="p">:</span>
-            <span class="n">indata</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">incode</span><span class="p">)</span>
-            <span class="n">ll</span><span class="o">=</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">indata</span><span class="p">]</span> <span class="c"># for each element in the list convert to int</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">ll</span><span class="p">)</span>
-         <span class="n">r</span><span class="o">=</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-         <span class="k">print</span><span class="p">(</span><span class="s">&quot;Decoded value: &quot;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-        
-</pre></div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[30]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">t</span><span class="o">=</span><span class="n">Hamming_codec</span><span class="p">()</span>
-<span class="n">t</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s">&#39;1101&#39;</span><span class="p">)</span>
-<span class="n">t</span><span class="o">.</span><span class="n">code</span><span class="p">()</span>
-<span class="n">t</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">And now introduce an error...&quot;</span><span class="p">)</span>
-<span class="n">t</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;1101011&#39;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">xls2csv</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 
 </div>
@@ -1521,13 +1421,18 @@ In&nbsp;[30]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-Code:  [[1 1 0 1 0 0 1]]
-Syndrom:  0
-Decoded value:  [[1 1 0 1 0 0 1]]
+usage: xls2csv.py [-h] [-v] [argfiles [argfiles ...]]
 
-And now introduce an error...
-Syndrom:  6
-Decoded value:  [[1 1 0 1 0 0 1]]
+This program converts a series of xls[x] files into csv.
+
+positional arguments:
+  argfiles       List of files to convert (accepts regular expression)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  Prints information
+
+(c) JFB 2014
 
 </pre>
 </div>
@@ -1540,7 +1445,46 @@ Decoded value:  [[1 1 0 1 0 0 1]]
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[33]:
+In&nbsp;[73]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">xls2csv</span> <span class="o">-</span><span class="n">vv</span> <span class="s">&quot;Note\*.xls&quot;</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+script arg:  [&apos;Note*.xls&apos;]
+glog.glog expansion:  [&apos;NotesB2ST12- AdaEtClassif-ISBS2-2013-14 (1).xls&apos;, &apos;NotesB2ST12-ISBS2-2013-14.xls&apos;, &apos;NotesB2ST02-ISBS2-2013-14.xls&apos;, &apos;NotesB2ST12- AdaEtClassif-ISBS2-2013-14.xls&apos;, &apos;NotesB1ST02-ISBS1-2012.xls&apos;] 
+
+Converting NotesB2ST12- AdaEtClassif-ISBS2-2013-14 (1).xls
+Converting NotesB2ST12-ISBS2-2013-14.xls
+Converting NotesB2ST02-ISBS2-2013-14.xls
+Converting NotesB2ST12- AdaEtClassif-ISBS2-2013-14.xls
+Converting NotesB1ST02-ISBS1-2012.xls
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Running this notebook will produce the script <code>xls2csv.py</code>. Otherwise, this can be also downloaded <a href="./downloads/code/xls2csv.py">here</a>.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[77]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
@@ -1554,15 +1498,15 @@ In&nbsp;[33]:
 
 
 <div class="hbox output_area"><div class="prompt output_prompt">
-    Out[33]:</div>
+    Out[77]:</div>
 <div class="box-flex1 output_subarea output_pyout">
 
 <div class="output_html rendered_html">
 
     <small>
     <p> This post was written as an IPython notebook.  It is available for
-    <a href="http://jfbercher.github.com/jfblog/downloads/notebooks/Hamming_code.ipynb">download</a> or as a static
-    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/jfblog/downloads/notebooks/Hamming_code.ipynb">html</a>.</p>
+    <a href="http://jfbercher.github.com/downloads/notebooks/Convert xls files to csv.ipynb">download</a> or as a static
+    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/downloads/notebooks/Convert xls files to csv.ipynb">html</a>.</p>
     <p></p>
     <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
     alt="Creative Commons License" style="border-width:0"
@@ -1591,8 +1535,9 @@ In&nbsp;[33]:
   <span class="byline author vcard">
     Posted by <span class="fn">J.-F. Bercher</span>
   </span>
-<time datetime="2014-06-15T22:12:00" pubdate>juin 15, 2014</time>  <span class="categories">
+<time datetime="2014-07-02T22:12:00" pubdate>juil. 02, 2014</time>  <span class="categories">
     <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
+    <a class="category" href="http://jfbercher.github.io/tag/xls.html">xls</a>
   </span>
 </p><div class="sharing">
 </div>    </footer>
@@ -1652,9 +1597,9 @@ In&nbsp;[33]:
 </p></footer>
 	<script type="text/javascript">
 	  var disqus_shortname = 'jfb-log';
-          var disqus_identifier = '/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/';
-          var disqus_url = 'http://jfbercher.github.io/blog/2014/06/15/This is a simple program for illustrating Hamming (7,4) coding/';
-          var disqus_title = 'Hamming_code';
+          var disqus_identifier = '/blog/2014/07/02/Convert xls files to csv/';
+          var disqus_url = 'http://jfbercher.github.io/blog/2014/07/02/Convert xls files to csv/';
+          var disqus_title = 'Convert xls files to csv';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
