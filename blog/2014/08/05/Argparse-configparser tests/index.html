@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>jfblog - Tags</title>
+  <title>Some tests of argparse and configparser modules</title>
   <meta name="author" content="J.-F. Bercher">
 
   <link href="http://jfbercher.github.io//atom.xml" type="application/atom+xml" rel="alternate"
@@ -1271,9 +1271,932 @@ jQuery(document).ready(function($) {
 </ul></nav>
   <div id="main">
     <div id="content">
-    <h1>Tags for jfblog</h1>        <li><a href="http://jfbercher.github.io/tag/ipython.html">ipython</a> (1)</li>
-        <li><a href="http://jfbercher.github.io/tag/misc.html">misc</a> (7)</li>
-        <li><a href="http://jfbercher.github.io/tag/xls.html">xls</a> (1)</li>
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Some tests of argparse and configparser modules</h1>
+      <p class="meta"><time datetime="2014-08-05T22:12:00" pubdate>Aug 05, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here are some notes on two modules of the standard library that can help to develop small scripts. The module <a href="https://docs.python.org/dev/library/argparse.html">argparse</a> helps to parse the arguments to the script while the module <a href="https://docs.python.org/3/library/configparser.html">configparser</a> is useful for reading a particular textfile configuration.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="argparse-examples">Argparse examples</h2>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The argparse module of the standard library is designed to ease the parsing of arguments to a script, either mandatory or optional. Besides, it offers a unix like help ans documentation of the script interface.The documentation is available in <a href="https://docs.python.org/dev/library/argparse.html">https://docs.python.org/dev/library/argparse.html</a>, together with a <a href="https://docs.python.org/dev/howto/argparse.html">howto</a>. A tutorial is also available in <a href="http://pymotw.com/2/argparse/">Python Module of the Week</a>.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[43]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">argparse_tst</span><span class="o">.</span><span class="n">py</span>
+<span class="c">#!/usr/bin/env python3</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#&quot;&quot;&quot;</span>
+<span class="c">#Created on July 19, 2014</span>
+<span class="c">#@author: bercherj</span>
+<span class="c">#&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program returns some interesting calculations.&quot;</span>
+<span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB&quot;</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A number&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;num1&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># if &#39;*&#39; any number of arguments</span>
+<span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A number&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;num2&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># if &#39;*&#39; any number of arguments</span>
+<span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> 
+                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;optional output file&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;out-file&#39;</span><span class="p">,</span> 
+                    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="c"># default=sys.stdout</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument (no flag)</span>
+<span class="c"># but with a default value</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A string&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;strarg&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="s">&#39;?&#39;</span> <span class="c"># 0 or 1</span>
+<span class="p">)</span>
+
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-op&#39;</span><span class="p">,</span>
+<span class="s">&#39;--operation&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;An operation to apply to the two numbers&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;op&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span><span class="p">,</span>
+<span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;add&#39;</span><span class="p">,</span><span class="s">&#39;sub&#39;</span><span class="p">,</span><span class="s">&#39;mul&#39;</span><span class="p">,</span><span class="s">&#39;div&#39;</span><span class="p">,</span><span class="s">&#39;pow&#39;</span><span class="p">),</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span>
+<span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-f&#39;</span><span class="p">,</span>
+<span class="s">&#39;--flag&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A flag&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;flag&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span>
+<span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-v&#39;</span><span class="p">,</span>
+<span class="s">&#39;--verbose&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;count&#39;</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="n">b</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">op</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span><span class="n">add</span><span class="p">,</span> <span class="s">&#39;sub&#39;</span><span class="p">:</span><span class="n">sub</span><span class="p">,</span> <span class="s">&#39;mul&#39;</span><span class="p">:</span><span class="n">mul</span><span class="p">,</span> <span class="s">&#39;div&#39;</span><span class="p">:</span><span class="n">div</span><span class="p">,</span> <span class="s">&#39;pow&#39;</span><span class="p">:</span><span class="nb">pow</span><span class="p">}</span>
+<span class="n">op_string</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span><span class="s">&#39;addition&#39;</span><span class="p">,</span> <span class="s">&#39;sub&#39;</span><span class="p">:</span><span class="s">&#39;subtraction&#39;</span><span class="p">,</span> <span class="s">&#39;mul&#39;</span><span class="p">:</span><span class="s">&#39;multiplication&#39;</span><span class="p">,</span> 
+           <span class="s">&#39;div&#39;</span><span class="p">:</span><span class="s">&#39;division&#39;</span><span class="p">,</span> <span class="s">&#39;pow&#39;</span><span class="p">:</span><span class="s">&#39;power&#39;</span><span class="p">}</span>
+
+<span class="n">verbose</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span>
+<span class="n">out</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">out</span><span class="p">,</span><span class="s">&quot;wt&quot;</span><span class="p">)</span>
+<span class="n">num1</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">num1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">num2</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">num2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;List of arguments: &quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">flag</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Flag f is set&quot;</span><span class="p">,</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Flag f is not set&quot;</span><span class="p">,</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">&quot;Computing the {0} of {1:d} and {2:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">op_string</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">op</span><span class="p">],</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">),</span>
+                  <span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result: &quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">op</span><span class="p">](</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting argparse_tst.py
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[44]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">argparse_tst</span> <span class="o">-</span><span class="n">hIPython</span> <span class="n">NotebookTest_argparse</span> <span class="n">Last</span> <span class="n">Checkpoint</span><span class="p">:</span> <span class="n">Aug</span> <span class="mo">05</span> <span class="mi">22</span><span class="p">:</span><span class="mi">39</span> <span class="p">(</span><span class="n">autosaved</span><span class="p">)</span>
+<span class="n">File</span>
+<span class="n">Edit</span>
+<span class="n">View</span>
+<span class="n">Insert</span>
+<span class="n">Cell</span>
+<span class="n">Kernel</span>
+<span class="n">Help</span>
+ <span class="n">Cell</span> <span class="n">Toolbar</span><span class="p">:</span>
+
+<span class="n">title</span><span class="p">:</span>  <span class="n">Some</span> <span class="n">tests</span> <span class="n">of</span> <span class="n">argparse</span> <span class="ow">and</span> <span class="n">configparser</span> <span class="n">modules</span>
+<span class="n">slug</span><span class="p">:</span> <span class="n">Argparse</span><span class="o">-</span><span class="n">configparser</span> <span class="n">tests</span>
+<span class="n">date</span><span class="p">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mo">05</span> <span class="mi">22</span><span class="p">:</span><span class="mi">12</span>
+<span class="n">tags</span><span class="p">:</span> <span class="n">misc</span>
+<span class="n">comments</span><span class="p">:</span> <span class="n">true</span>
+ 
+<span class="n">Here</span> <span class="n">are</span> <span class="n">some</span> <span class="n">notes</span> <span class="n">on</span> <span class="n">two</span> <span class="n">modules</span> <span class="n">of</span> <span class="n">the</span> <span class="n">standard</span> <span class="n">library</span> <span class="n">that</span> <span class="n">can</span> <span class="n">help</span> <span class="n">to</span> <span class="n">develop</span> <span class="n">small</span> <span class="n">scripts</span><span class="o">.</span> <span class="n">The</span> <span class="n">module</span> <span class="n">argparse</span> <span class="n">helps</span> <span class="n">to</span> <span class="n">parse</span> <span class="n">the</span> <span class="n">arguments</span> <span class="n">to</span> <span class="n">the</span> <span class="n">script</span> <span class="k">while</span> <span class="n">the</span> <span class="n">module</span> <span class="n">configparser</span> <span class="ow">is</span> <span class="n">useful</span> <span class="k">for</span> <span class="n">reading</span> <span class="n">a</span> <span class="n">particular</span> <span class="n">textfile</span> <span class="n">configuration</span><span class="o">.</span>
+<span class="n">Argparse</span> <span class="n">examples</span>
+<span class="n">The</span> <span class="n">argparse</span> <span class="n">module</span> <span class="n">of</span> <span class="n">the</span> <span class="n">standard</span> <span class="n">library</span> <span class="ow">is</span> <span class="n">designed</span> <span class="n">to</span> <span class="n">ease</span> <span class="n">the</span> <span class="n">parsing</span> <span class="n">of</span> <span class="n">arguments</span> <span class="n">to</span> <span class="n">a</span> <span class="n">script</span><span class="p">,</span> <span class="n">either</span> <span class="n">mandatory</span> <span class="ow">or</span> <span class="n">optional</span><span class="o">.</span> <span class="n">Besides</span><span class="p">,</span> <span class="n">it</span> <span class="n">offers</span> <span class="n">a</span> <span class="n">unix</span> <span class="n">like</span> <span class="n">help</span> <span class="n">ans</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">script</span> <span class="n">interface</span><span class="o">.</span><span class="n">The</span> <span class="n">documentation</span> <span class="ow">is</span> <span class="n">available</span> <span class="ow">in</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">argparse</span><span class="o">.</span><span class="n">html</span><span class="p">,</span> <span class="n">together</span> <span class="k">with</span> <span class="n">a</span> <span class="n">howto</span><span class="o">.</span> <span class="n">A</span> <span class="n">tutorial</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">available</span> <span class="ow">in</span> <span class="n">Python</span> <span class="n">Module</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Week</span><span class="o">.</span>
+
+<span class="o">%%</span><span class="k">file</span> <span class="n">argparse_tst</span><span class="o">.</span><span class="n">py</span>
+<span class="c">#!/usr/bin/env python3</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#&quot;&quot;&quot;</span>
+<span class="c">#Created on July 19, 2014</span>
+<span class="c">#@author: bercherj</span>
+<span class="c">#&quot;&quot;&quot;</span>
+ 
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+ 
+<span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program returns some interesting calculations.&quot;</span>
+<span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB&quot;</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A number&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;num1&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># if &#39;*&#39; any number of arguments</span>
+<span class="p">)</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A number&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;num2&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># if &#39;*&#39; any number of arguments</span>
+<span class="p">)</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> 
+                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;optional output file&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;out-file&#39;</span><span class="p">,</span> 
+                    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="c"># default=sys.stdout</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; --&gt; positional argument (no flag)</span>
+<span class="c"># but with a default value</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A string&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;strarg&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span><span class="p">,</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span>
+<span class="n">nargs</span> <span class="o">=</span> <span class="s">&#39;?&#39;</span> <span class="c"># 0 or 1</span>
+<span class="p">)</span>
+ 
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-op&#39;</span><span class="p">,</span>
+<span class="s">&#39;--operation&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;An operation to apply to the two numbers&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;op&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span><span class="p">,</span>
+<span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;add&#39;</span><span class="p">,</span><span class="s">&#39;sub&#39;</span><span class="p">,</span><span class="s">&#39;mul&#39;</span><span class="p">,</span><span class="s">&#39;div&#39;</span><span class="p">,</span><span class="s">&#39;pow&#39;</span><span class="p">),</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span>
+<span class="p">)</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-f&#39;</span><span class="p">,</span>
+<span class="s">&#39;--flag&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;A flag&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;flag&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span>
+<span class="p">)</span>
+ 
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+<span class="s">&#39;-v&#39;</span><span class="p">,</span>
+<span class="s">&#39;--verbose&#39;</span><span class="p">,</span>
+<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+<span class="n">action</span><span class="o">=</span><span class="s">&#39;count&#39;</span>
+<span class="p">)</span>
+ 
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+<span class="k">def</span> <span class="nf">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="n">b</span>
+ 
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">op</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span><span class="n">add</span><span class="p">,</span> <span class="s">&#39;sub&#39;</span><span class="p">:</span><span class="n">sub</span><span class="p">,</span> <span class="s">&#39;mul&#39;</span><span class="p">:</span><span class="n">mul</span><span class="p">,</span> <span class="s">&#39;div&#39;</span><span class="p">:</span><span class="n">div</span><span class="p">,</span> <span class="s">&#39;pow&#39;</span><span class="p">:</span><span class="nb">pow</span><span class="p">}</span>
+<span class="n">op_string</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span><span class="s">&#39;addition&#39;</span><span class="p">,</span> <span class="s">&#39;sub&#39;</span><span class="p">:</span><span class="s">&#39;subtraction&#39;</span><span class="p">,</span> <span class="s">&#39;mul&#39;</span><span class="p">:</span><span class="s">&#39;multiplication&#39;</span><span class="p">,</span> 
+           <span class="s">&#39;div&#39;</span><span class="p">:</span><span class="s">&#39;division&#39;</span><span class="p">,</span> <span class="s">&#39;pow&#39;</span><span class="p">:</span><span class="s">&#39;power&#39;</span><span class="p">}</span>
+ 
+<span class="n">verbose</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span>
+<span class="n">out</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">out</span><span class="p">,</span><span class="s">&quot;wt&quot;</span><span class="p">)</span>
+<span class="n">num1</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">num1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">num2</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">num2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+ 
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;List of arguments: &quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+ 
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">flag</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Flag f is set&quot;</span><span class="p">,</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Flag f is not set&quot;</span><span class="p">,</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+ 
+<span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">&quot;Computing the {0} of {1:d} and {2:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">op_string</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">op</span><span class="p">],</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">),</span>
+                  <span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result: &quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">op</span><span class="p">](</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+ 
+<span class="n">Overwriting</span> <span class="n">argparse_tst</span><span class="o">.</span><span class="n">py</span>
+
+<span class="o">%</span><span class="k">run</span> <span class="n">argparse_tst</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">argparse_tst</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">out</span><span class="o">-</span><span class="nb">file</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">op</span> <span class="p">{</span><span class="n">add</span><span class="p">,</span><span class="n">sub</span><span class="p">,</span><span class="n">mul</span><span class="p">,</span><span class="n">div</span><span class="p">,</span><span class="nb">pow</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span>
+                       <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span>
+                       <span class="n">num1</span> <span class="n">num2</span> <span class="p">[</span><span class="n">strarg</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+usage: argparse_tst.py [-h] [-o out-file] [-op {add,sub,mul,div,pow}] [-f]
+                       [-v]
+                       num1 num2 [strarg]
+
+This program returns some interesting calculations.
+
+positional arguments:
+  num1                  A number
+  num2                  A number
+  strarg                A string
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o out-file           optional output file
+  -op {add,sub,mul,div,pow}, --operation {add,sub,mul,div,pow}
+                        An operation to apply to the two numbers
+  -f, --flag            A flag
+  -v, --verbose         Prints information
+
+(c) JFB
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[45]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">argparse_tst</span> <span class="mi">2</span> <span class="mi">2</span> <span class="o">-</span><span class="n">op</span><span class="o">=</span><span class="n">add</span> <span class="o">-</span><span class="n">vv</span> <span class="o">-</span><span class="n">o</span><span class="o">=</span><span class="n">bibi</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[46]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">cat</span> <span class="n">bibi</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+List of arguments:  Namespace(flag=False, num1=[2], num2=[2], op=&apos;add&apos;, out=&apos;bibi.txt&apos;, strarg=&apos;Test&apos;, verbose=2)
+Flag f is not set
+Computing the addition of 2 and 2
+Result:  4
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="configparser">ConfigParser</h2>
+<p>It is also possible to load a prespecified configuration, using a config parser, like <a href="https://docs.python.org/3/library/configparser.html">ConfigParser</a> in the standard library. We give a simple example here, where we load a proxy configuration.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="the-proxy-configuration">The proxy configuration</h3>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[47]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">proxies</span><span class="o">.</span><span class="n">cfg</span>
+<span class="p">[</span><span class="n">esiee</span><span class="p">]</span>
+<span class="n">http</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">cache</span><span class="o">.</span><span class="n">esiee</span><span class="o">.</span><span class="n">fr</span><span class="p">:</span><span class="mi">3128</span><span class="o">/</span>
+<span class="n">https</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">cache</span><span class="o">.</span><span class="n">esiee</span><span class="o">.</span><span class="n">fr</span><span class="p">:</span><span class="mi">3128</span><span class="o">/</span>
+<span class="p">[</span><span class="n">home</span><span class="p">]</span>
+<span class="n">http</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">proxy</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ext</span><span class="p">:</span><span class="mi">3128</span><span class="o">/</span>
+<span class="n">https</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">proxy</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ext</span><span class="p">:</span><span class="mi">3128</span><span class="o">/</span>    
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Writing proxies.cfg
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[57]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">configparser_tst</span><span class="o">.</span><span class="n">py</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program tests the config parser.&quot;</span>
+<span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB&quot;</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-v&#39;</span><span class="p">,</span><span class="s">&#39;--verbose&#39;</span><span class="p">,</span><span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-p&#39;</span><span class="p">,</span><span class="s">&#39;-proxy&#39;</span><span class="p">,</span><span class="s">&#39;--proxy&#39;</span><span class="p">,</span>
+    <span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Takes proxy configuration from &quot;proxies.cfg&quot;&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;proxy&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<span class="n">proxies</span><span class="o">=</span><span class="p">{}</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">:</span> <span class="c"># if the proxy option has been specified in the arguments</span>
+    <span class="kn">import</span> <span class="nn">configparser</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;proxies.cfg&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span><span class="p">:</span> <span class="c">#if the cfg file exists</span>
+        <span class="k">try</span><span class="p">:</span>
+           <span class="n">proxies</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span> <span class="c"># the specified key does not correspond to a section in the cfg file</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; is not a valid key for a proxy section&quot;</span> <span class="o">%</span> <span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;The config file proxies.cfg does not exist in current directory&quot;</span><span class="p">)</span>    
+
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;proxies= &#39;</span><span class="p">,</span><span class="n">proxies</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting configparser_tst.py
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[153]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">configparser_tst</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+usage: configparser_tst.py [-h] [-v] [-p PROXY]
+
+This program tests the config parser.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         Prints information
+  -p PROXY, -proxy PROXY, --proxy PROXY
+                        Takes proxy configuration from &quot;proxies.cfg&quot;
+
+(c) JFB
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[151]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">configparser_tst</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span><span class="o">=</span><span class="n">zerg</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Namespace(proxy=&apos;zerg&apos;, verbose=False)
+&apos;zerg&apos; is not a valid key for a proxy section
+proxies=  {}
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[152]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">configparser_tst</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span><span class="o">=</span><span class="n">esiee</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Namespace(proxy=&apos;esiee&apos;, verbose=False)
+proxies=  {&apos;http&apos;: &apos;http://cache.esiee.fr:3128/&apos;, &apos;https&apos;: &apos;http://cache.esiee.fr:3128/&apos;}
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="a-simple-translation-script">A simple translation script</h2>
+<p>A funny example is the translation of a word given on the command line. For that, we use the <a href="http://glosbe.com/a-api">http://glosbe.com/a-api</a> API. The script makes use of - arguments on the command line, parsed with <code>argparse</code> - a configuration processed thanks to <code>configparser</code> - an internet connection</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[149]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">translate_a_word</span><span class="o">.</span><span class="n">py</span>
+<span class="c">#author:jfb august 2014</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+
+
+
+<span class="c">### 1 ###  Script arguments and config ###################################</span>
+<span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program translates a word from a language to another.&quot;</span>
+<span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB&quot;</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-v&#39;</span><span class="p">,</span><span class="s">&#39;--verbose&#39;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">)</span>
+
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-f&#39;</span><span class="p">,</span><span class="s">&#39;--from&#39;</span><span class="p">,</span><span class="n">help</span> <span class="o">=</span> <span class="s">&#39;translate from&#39;</span><span class="p">,</span><span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;fro&#39;</span><span class="p">,</span>
+<span class="n">default</span> <span class="o">=</span> <span class="s">&#39;fr&#39;</span><span class="p">,</span><span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;en&#39;</span><span class="p">,</span><span class="s">&#39;de&#39;</span><span class="p">,</span><span class="s">&#39;fr&#39;</span><span class="p">,</span><span class="s">&#39;nl&#39;</span><span class="p">,</span><span class="s">&#39;es&#39;</span><span class="p">),</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-t&#39;</span><span class="p">,</span><span class="s">&#39;--to&#39;</span><span class="p">,</span><span class="n">help</span> <span class="o">=</span> <span class="s">&#39;translate to&#39;</span><span class="p">,</span><span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;to&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="s">&#39;en&#39;</span><span class="p">,</span>
+<span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;en&#39;</span><span class="p">,</span><span class="s">&#39;de&#39;</span><span class="p">,</span><span class="s">&#39;fr&#39;</span><span class="p">,</span><span class="s">&#39;nl&#39;</span><span class="p">,</span><span class="s">&#39;es&#39;</span><span class="p">),</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">help</span> <span class="o">=</span> <span class="s">&#39;word to translate&#39;</span><span class="p">,</span><span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;word&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span><span class="p">,</span>
+<span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-p&#39;</span><span class="p">,</span><span class="s">&#39;-proxy&#39;</span><span class="p">,</span><span class="s">&#39;--proxy&#39;</span><span class="p">,</span>
+                    <span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Takes proxy configuration from &quot;proxies.cfg&quot;&#39;</span><span class="p">,</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;proxy&#39;</span><span class="p">,</span><span class="n">default</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">)</span>
+
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="n">proxies</span><span class="o">=</span><span class="p">{}</span>
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">configparser</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;proxies.cfg&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span><span class="p">:</span> <span class="c">#if the cfg file exists</span>
+        <span class="k">try</span><span class="p">:</span>
+           <span class="n">proxies</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; is not a valid key for a proxy section&quot;</span> <span class="o">%</span> <span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;The config file proxies.cfg does not exist in current directory&quot;</span><span class="p">)</span>    
+
+<span class="c">### 2 ### connects to the web service  ###################################</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">&#39;http://glosbe.com/gapi/translate&#39;</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;from&#39;</span> <span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">fro</span> <span class="p">,</span> <span class="s">&#39;dest&#39;</span> <span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">to</span> <span class="p">,</span>
+              <span class="s">&#39;format&#39;</span><span class="p">:</span><span class="s">&#39;json&#39;</span> <span class="p">,</span> <span class="s">&#39;phrase&#39;</span> <span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="s">&#39;pretty&#39;</span> <span class="p">:</span> <span class="s">&#39;true&#39;</span><span class="p">,</span> <span class="s">&#39;tm&#39;</span> <span class="p">:</span> <span class="s">&#39;false&#39;</span><span class="p">}</span>
+                       
+<span class="n">proxy_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">proxy_handler</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s">&#39;/?&#39;</span><span class="o">+</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+<span class="n">the_page</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;latin1&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">page</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">the_page</span><span class="p">)</span>
+
+<span class="c">### 3 ### Prints the translations  #########################################</span>
+<span class="c"># kind of result filtering</span>
+<span class="kn">import</span> <span class="nn">html.parser</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">HTMLParser</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">page</span><span class="p">[</span><span class="s">&#39;tuc&#39;</span><span class="p">]:</span> 
+    <span class="k">if</span> <span class="s">&#39;phrase&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s">&#39;meanings&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> 
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;meanings&#39;</span><span class="p">])):</span>
+                 <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;meanings&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s">&#39;text&#39;</span><span class="p">]))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;--&gt;&quot;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;phrase&#39;</span><span class="p">][</span><span class="s">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting translate_a_word.py
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For reference, we look at the dictionary obtained after <code>page=json.loads(the_page)</code></p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[148]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">page</span><span class="p">[</span><span class="s">&#39;tuc&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[148]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+[{&apos;phrase&apos;: {&apos;text&apos;: &apos;buenos dÃ\xadas&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [1],
+  &apos;meaningId&apos;: 9170866376525822931,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;Saludo que se dice al encontrarse con alguien o al despedirse en la ma&amp;ntilde;ana.&apos;,
+    &apos;language&apos;: &apos;spa&apos;},
+   {&apos;text&apos;: &apos;Salutation dite quand on se rencontre ou quand on se quitte le matin.&apos;,
+    &apos;language&apos;: &apos;fra&apos;},
+   {&apos;text&apos;: &apos;Saludo que se utiliza durante el d&amp;iacute;a.&apos;, &apos;language&apos;: &apos;spa&apos;},
+   {&apos;text&apos;: &apos;Salutation dite dans la journ&amp;eacute;e.&apos;, &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;hola&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [1],
+  &apos;meaningId&apos;: 3237975184227305932,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;Expresi&amp;oacute;n de saludo utilizada entre dos o m&amp;aacute;s personas de trato familiar.&apos;,
+    &apos;language&apos;: &apos;spa&apos;},
+   {&apos;text&apos;: &apos;Expression de salutation utilis&amp;eacute;e entre deux personnes ou plus qui se rencontrent.&apos;,
+    &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;buenas tardes&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [2698],
+  &apos;meaningId&apos;: 8754367228613803561},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;buenas maÃ±anas&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [60172],
+  &apos;meaningId&apos;: 844651127364049044,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;Saludo que se dice al encontrarse con alguien o al despedirse en la ma&amp;ntilde;ana.&apos;,
+    &apos;language&apos;: &apos;spa&apos;},
+   {&apos;text&apos;: &apos;Salutation dite quand on se rencontre ou quand on se quitte le matin.&apos;,
+    &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;Buenas tardes&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [2695],
+  &apos;meaningId&apos;: -7862237962244860629},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;buenos dias&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [2697],
+  &apos;meaningId&apos;: -6184143237658615968},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;quÃ© tal&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [1],
+  &apos;meaningId&apos;: -9037967328194913728},
+ {&apos;phrase&apos;: {&apos;text&apos;: &apos;saludo&apos;, &apos;language&apos;: &apos;spa&apos;},
+  &apos;authors&apos;: [2692],
+  &apos;meaningId&apos;: 8882182478762943055},
+ {&apos;authors&apos;: [1796],
+  &apos;meaningId&apos;: None,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;ga&amp;icirc;suwa tsakanin mutun biyu ko daiwa daga asuba har zuwa tasawa rana&apos;,
+    &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;authors&apos;: [2736],
+  &apos;meaningId&apos;: None,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;bonsoir (lorsque l&amp;rsquo;on s&amp;rsquo;adresse a une personne qui rentre)&apos;,
+    &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;authors&apos;: [2736],
+  &apos;meaningId&apos;: None,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;bonjour (dans la journ&amp;eacute;e)&apos;,
+    &apos;language&apos;: &apos;fra&apos;}]},
+ {&apos;authors&apos;: [2736],
+  &apos;meaningId&apos;: None,
+  &apos;meanings&apos;: [{&apos;text&apos;: &apos;bonjour (le matin)&apos;, &apos;language&apos;: &apos;fra&apos;}]}]
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="and-finally-the-test-of-the-script">And finally the test of the script</h3>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[137]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">translate_a_word</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+usage: translate_a_word.py [-h] [-v] [-f {en,de,fr,nl,es}]
+                           [-t {en,de,fr,nl,es}] [-p PROXY]
+                           word
+
+This program tests the config parser.
+
+positional arguments:
+  word                  word to translate
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         Prints information
+  -f {en,de,fr,nl,es}, --from {en,de,fr,nl,es}
+                        translate from
+  -t {en,de,fr,nl,es}, --to {en,de,fr,nl,es}
+                        translate to
+  -p PROXY, -proxy PROXY, --proxy PROXY
+                        Takes proxy configuration from &quot;proxies.cfg&quot;
+
+(c) JFB
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>and an actual translation</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[146]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">translate_a_word</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="o">=</span><span class="n">fr</span> <span class="o">-</span><span class="n">t</span><span class="o">=</span><span class="n">es</span>  <span class="n">bonjour</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Saludo que se dice al encontrarse con alguien o al despedirse en la mañana.
+Salutation dite quand on se rencontre ou quand on se quitte le matin.
+Saludo que se utiliza durante el día.
+Salutation dite dans la journée.
+--&gt; buenos dÃ­as
+Expresión de saludo utilizada entre dos o más personas de trato familiar.
+Expression de salutation utilisée entre deux personnes ou plus qui se rencontrent.
+--&gt; hola
+--&gt; buenas tardes
+Saludo que se dice al encontrarse con alguien o al despedirse en la mañana.
+Salutation dite quand on se rencontre ou quand on se quitte le matin.
+--&gt; buenas maÃ±anas
+--&gt; Buenas tardes
+--&gt; buenos dias
+--&gt; quÃ© tal
+--&gt; saludo
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[1]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[1]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+<div class="output_html rendered_html">
+
+    <small>
+    <p> This post was written as an IPython notebook.  It is available for
+    <a href="http://jfbercher.github.com/downloads/notebooks/Test_argparse.ipynb">download</a> or as a static
+    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/downloads/notebooks/Test_argparse.ipynb">html</a>.</p>
+    <p></p>
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+    alt="Creative Commons License" style="border-width:0"
+    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title">jfblog</span> by <a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL">J.-F. Bercher</a> is
+    licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+    Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source">http://jfbercher.github.io/</a>.
+        
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">J.-F. Bercher</span>
+  </span>
+<time datetime="2014-08-05T22:12:00" pubdate>Aug 05, 2014</time>  <span class="categories">
+    <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
@@ -1323,6 +2246,9 @@ jQuery(document).ready(function($) {
 </p></footer>
 	<script type="text/javascript">
 	  var disqus_shortname = 'jfb-log';
+          var disqus_identifier = '/blog/2014/08/05/Argparse-configparser tests/';
+          var disqus_url = 'http://jfbercher.github.io/blog/2014/08/05/Argparse-configparser tests/';
+          var disqus_title = 'Some tests of argparse and configparser modules';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

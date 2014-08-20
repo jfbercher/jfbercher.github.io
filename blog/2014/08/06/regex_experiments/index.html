@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>jfblog - Tags</title>
+  <title>Regular expressions experiments</title>
   <meta name="author" content="J.-F. Bercher">
 
   <link href="http://jfbercher.github.io//atom.xml" type="application/atom+xml" rel="alternate"
@@ -1271,9 +1271,899 @@ jQuery(document).ready(function($) {
 </ul></nav>
   <div id="main">
     <div id="content">
-    <h1>Tags for jfblog</h1>        <li><a href="http://jfbercher.github.io/tag/ipython.html">ipython</a> (1)</li>
-        <li><a href="http://jfbercher.github.io/tag/misc.html">misc</a> (7)</li>
-        <li><a href="http://jfbercher.github.io/tag/xls.html">xls</a> (1)</li>
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Regular expressions experiments</h1>
+      <p class="meta"><time datetime="2014-08-06T22:12:00" pubdate>Aug 06, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Experiments with <a href="https://docs.python.org/2/library/re.html">regular expressions</a>. A good introduction is available at <a href="https://developers.google.com/edu/python/regular-expressions?hl=fr">Google's Python classes</a>. One can also look at the chapter into <a href="http://www.diveintopython.net/regular_expressions/index.html">Dive into Python</a>. An online regular expression tester is available <a href="http://regex101.com/#python">here</a>.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>a, X, 9, &lt; -- ordinary characters just match themselves exactly. The meta-characters which do not match themselves because they have special meanings are: . ^ $ * + ? { [ ]  | ( ) (details below)</p></li>
+<li>. (a period) -- matches any single character except newline ''</li>
+<li>-- (lowercase w) matches a &quot;word&quot; character: a letter or digit or underbar [a-zA-Z0-9_]. Note that although &quot;word&quot; is the mnemonic for this, it only matches a single word char, not a whole word. (upper case W) matches any non-word character.</li>
+<li>-- boundary between word and non-word</li>
+<li>-- (lowercase s) matches a single whitespace character -- space, newline, return, tab, form [ ]. (upper case S) matches any non-whitespace character.</li>
+<li>, , -- tab, newline, return</li>
+<li>-- decimal digit [0-9] (some older regex utilities do not support but , but they all support and )</li>
+<li>^ = start, $ = end -- match the start or end of the string</li>
+<li><p> -- inhibit the &quot;specialness&quot; of a character. So, for example, use . to match a period or \ to match a slash. If you are unsure if a character has special meaning, such as '@', you can put a slash in front of it, @, to make sure it is treated just as a character.</p></li>
+</ul>
+<p>Things get more interesting when you use + and * to specify repetition in the pattern</p>
+<ul>
+<li>&quot;+&quot; -- 1 or more occurrences of the pattern to its left, e.g. 'i+' = one or more i's</li>
+<li>&quot;*&quot; -- 0 or more occurrences of the pattern to its left</li>
+<li>&quot;?&quot; -- match 0 or 1 occurrences of the pattern to its left</li>
+</ul>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="testing-emails">Testing emails</h3>
+<p>We first create a file with a list of emails. The goal is to deign a simple regexp in order to check the validity of emails.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[72]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">tstmails</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">jf</span><span class="o">.</span><span class="n">bercher</span><span class="nd">@esiee.fr</span>
+<span class="n">jfb</span><span class="nd">@mailinator.com</span>
+<span class="n">daniel</span><span class="o">.</span><span class="n">courivaud</span><span class="nd">@esiee.fr</span>
+<span class="n">zorro</span><span class="o">.</span><span class="n">pancho</span><span class="nd">@arizona</span><span class="o">-</span><span class="n">u</span><span class="o">.</span><span class="n">edu</span>
+<span class="n">tEsT</span><span class="nd">@domain.info</span>
+<span class="n">test</span><span class="nd">@my</span><span class="o">-</span><span class="n">domain</span><span class="o">.</span><span class="n">info</span>
+<span class="n">test</span><span class="nd">@my</span><span class="o">-</span><span class="n">domain</span><span class="o">.</span><span class="n">information</span>
+<span class="n">de</span><span class="o">-</span><span class="n">quoi</span><span class="o">-</span><span class="n">je</span><span class="o">-</span><span class="n">me</span><span class="o">-</span><span class="n">m</span><span class="err">è</span><span class="n">le</span><span class="nd">@adresse.org</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting tstmails.txt
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first idea is just to check that an email has the structure &quot;name@domain.ext&quot;. Then one can refine the test by noting that name and domain are composed of standard (not extended) ascii characters, plus the &quot;.&quot;, &quot;_&quot; and &quot;-&quot;. (without &quot;.&quot; for the domain part). Furthermore, the ext has a length between 1 and 4.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[73]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">mail</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;\w+@\w+\.\w{1,4}&quot;</span><span class="p">)</span>
+<span class="n">mail2</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;&quot;&quot;</span>
+<span class="s">                 [\w.-]+ #an alphanumeric character [a-zA-Z0-9_] plus . and -</span>
+<span class="s">                 @ # the @</span>
+<span class="s">                 [\w-]+ #an alphanumeric character [a-zA-Z0-9_] plus  -</span>
+<span class="s">                 \. # a .</span>
+<span class="s">                 \w{1,4} # between one and 4 characters</span>
+<span class="s">                 $ # end of string</span>
+<span class="s">                 &quot;&quot;&quot;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">ASCII</span><span class="o">|</span><span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+                
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;tstmails.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="n">mails</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="o">*</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;With 1st test&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="o">*</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tst</span> <span class="ow">in</span> <span class="n">mails</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">mail</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">tst</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0:&lt;32s} --- MATCHED&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tst</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0:&lt;32s} --- NOT MATCHED&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tst</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="o">*</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;With 2nt test&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="o">*</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tst</span> <span class="ow">in</span> <span class="n">mails</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">mail2</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">tst</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0:&lt;32s} --- MATCHED&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tst</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;{0:&lt;32s} --- NOT MATCHED&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tst</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="looking-for-and-extracting-components-of-a-date">Looking for and extracting components of a date</h3>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[4]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span><span class="o">=</span><span class="err">!</span><span class="n">date</span> 
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[5]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">a</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[5]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+[&apos;mardi 12 août 2014, 17:09:40 (UTC+0200)&apos;]
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[106]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;\d{2}:\d{2}:\d{2}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c">#print(dir(out))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result of first regexp: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">out</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;(\d{2}):(\d{2}):(\d{2})&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result of second regexp: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;group 1: &quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;group 3: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="c"># with named groups</span>
+<span class="n">out</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;(?P&lt;hours&gt;\d{2}):(?P&lt;minutes&gt;\d{2}):(?P&lt;seconds&gt;\d{2})&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result of third regexp: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;hour: &quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;hours&#39;</span><span class="p">),</span> <span class="s">&quot;minutes: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;minutes&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Result of first regexp:  17:03:01
+Result of second regexp:  17:03:01 
+ group 1:  17 group 3:  01
+Result of third regexp:  17:03:01 
+ hour:  17 minutes:  03
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we test the <code>findall</code> version for extracting all the timestamps of a text.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[110]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">txt</span><span class="o">=</span><span class="s">&quot;Nuon Chea est d&#39;évidence, après la mort de Pol Pot, le 15 avril 1998, celui que la justice pouvait considérer le plus directement 17:21:35 responsable dans l&#39;élaboration des rouages de la machine de mort mise en place au Cambodge après la chute de Phnom Penh aux 17:24:30 mains des Khmers rouges, le 17 avril 1975. « On peut se demander si Nuon Chea, le “frère numéro deux”, n&#39;était pas presque aussi important que le “frère numéro un” [Pol Pot] », avance même l&#39;historien Henri Locard dans son livre Pourquoi les Khmers rouges ? (éditions Vendémiaire, 2013). Selon lui, 18:20:05 le couple Pol-Nuon formait comme une « hydre à deux têtes&quot;</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[117]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">out</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;(?P&lt;hours&gt;\d{2}):(?P&lt;minutes&gt;\d{2}):(?P&lt;seconds&gt;\d{2})&quot;</span><span class="p">,</span><span class="n">txt</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Result: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;hour: &quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;hours&#39;</span><span class="p">),</span> <span class="s">&quot;minutes: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;minutes&#39;</span><span class="p">),</span><span class="s">&quot;secondes: &quot;</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;seconds&#39;</span><span class="p">))</span>
+
+<span class="n">hours</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;(?P&lt;hours&gt;\d{2}):(?P&lt;minutes&gt;\d{2}):(?P&lt;seconds&gt;\d{2})&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="o">=</span><span class="n">hours</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;hours {0}: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">&quot;h &quot;</span><span class="p">,</span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">&quot;m &quot;</span><span class="p">,</span><span class="n">h</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s">&quot;s&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Result:  17:21:35 
+ hour:  17 minutes:  21 secondes:  35
+hours 0:  17 h  21 m  35 s
+hours 1:  17 h  24 m  30 s
+hours 2:  18 h  20 m  05 s
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="looking-for-the-charset-in-an-html-file">Looking for the charset in an html file</h3>
+<p>The charset can be found in html thanks to the tag <code>meta</code> - HTML5: <code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code> - HTML4: <code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;</code> - sometimes <code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;</code></p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[57]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c"># Usin a regular expression</span>
+<span class="k">def</span> <span class="nf">look_for_encoding</span><span class="p">(</span><span class="n">html</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;&lt;meta\s* http-equiv.*?charset=[&quot;</span><span class="se">\&#39;</span><span class="s">]*(.+?)[&quot;</span><span class="se">\&#39;</span><span class="s">\/]*&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">encoding</span><span class="p">:</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;&lt;meta.*?charset=[&quot;</span><span class="se">\&#39;</span><span class="s">]*(.+?)[&quot;</span><span class="se">\&#39;</span><span class="s">\/]*&gt;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">encoding</span><span class="p">:</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span>
+    <span class="k">return</span> <span class="n">encoding</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>            
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Test</strong>: - we give a (moderately) <em>difficult</em> html text -- from <a href="http://www.r10.net/webmaster-genel-konular-sorunlar/993260-charsetiso-8859-9-charsetwindows-1254-charsetutf-8-kullanimi-hakkinda-yardim.html">here</a> - launch the <code>look_for_encoding</code> function on it</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[6]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">html_encoding_tst</span><span class="o">.</span><span class="n">html</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="n">DOCTYPE</span> <span class="n">html</span> <span class="n">PUBLIC</span> <span class="s">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="s">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">html</span> <span class="n">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="nb">dir</span><span class="o">=</span><span class="s">&quot;ltr&quot;</span> <span class="n">lang</span><span class="o">=</span><span class="s">&quot;tr&quot;</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">base</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;http://www.r10.net/&quot;</span><span class="o">/&gt;&lt;</span><span class="err">!</span><span class="o">--</span><span class="p">[</span><span class="k">if</span> <span class="n">IE</span><span class="p">]</span><span class="o">&gt;&lt;/</span><span class="n">base</span><span class="o">&gt;&lt;</span><span class="err">!</span><span class="p">[</span><span class="n">endif</span><span class="p">]</span><span class="o">--&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="nb">property</span><span class="o">=</span><span class="s">&quot;og:image&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;http://www.r10.net/ogmeta.jpg&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="n">itemprop</span><span class="o">=</span><span class="s">&quot;image&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;http://www.r10.net/ogmeta.jpg&quot;</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<span class="o">//&lt;</span><span class="err">!</span><span class="p">[</span><span class="n">CDATA</span><span class="p">[</span>
+<span class="k">try</span><span class="p">{</span><span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="n">window</span><span class="o">.</span><span class="n">CloudFlare</span><span class="p">)</span> <span class="p">{</span><span class="n">var</span> <span class="n">CloudFlare</span><span class="o">=</span><span class="p">[{</span><span class="n">verbose</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">p</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">byc</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">owlid</span><span class="p">:</span><span class="s">&quot;cf&quot;</span><span class="p">,</span><span class="n">bag2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="n">mirage2</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">oracle</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">paths</span><span class="p">:{</span><span class="n">cloudflare</span><span class="p">:</span><span class="s">&quot;/cdn-cgi/nexp/dokv=88e434a982/&quot;</span><span class="p">},</span><span class="n">atok</span><span class="p">:</span><span class="s">&quot;1b6c1619cc6cd0bc2fb552cd582bec70&quot;</span><span class="p">,</span><span class="n">petok</span><span class="p">:</span><span class="s">&quot;ddbe7bcfe5ba056091fa074d5173e3802d6ef986-1407230025-1800&quot;</span><span class="p">,</span><span class="n">zone</span><span class="p">:</span><span class="s">&quot;r10.net&quot;</span><span class="p">,</span><span class="n">rocket</span><span class="p">:</span><span class="s">&quot;m&quot;</span><span class="p">,</span><span class="n">apps</span><span class="p">:{</span><span class="s">&quot;brwbl&quot;</span><span class="p">:{</span><span class="s">&quot;a&quot;</span><span class="p">:</span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="s">&quot;brwbl&quot;</span><span class="p">:</span><span class="s">&quot;38,38,40,40,37,39,37,39,66,65&quot;</span><span class="p">},</span><span class="s">&quot;abetterbrowser&quot;</span><span class="p">:{</span><span class="s">&quot;ie&quot;</span><span class="p">:</span><span class="s">&quot;7&quot;</span><span class="p">}}}];</span><span class="n">CloudFlare</span><span class="o">.</span><span class="n">push</span><span class="p">({</span><span class="s">&quot;apps&quot;</span><span class="p">:{</span><span class="s">&quot;ape&quot;</span><span class="p">:</span><span class="s">&quot;6781678d84514f25f701f9c595588ba7&quot;</span><span class="p">}});</span><span class="n">document</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;&lt;script type=&quot;text/javascript&quot; src=&quot;//ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js&quot;&gt;&lt;&#39;</span><span class="o">+</span><span class="s">&#39;\/script&gt;&#39;</span><span class="p">);}}</span><span class="n">catch</span><span class="p">(</span><span class="n">e</span><span class="p">){};</span>
+<span class="o">//</span><span class="p">]]</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s">&quot;image_src&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;http://www.r10.net/ogmeta.jpg&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="nb">property</span><span class="o">=</span><span class="s">&quot;og:title&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;charset=iso-8859-9, charset=windows-1254, charset=utf-8&amp;quot; kullanımı hakkında yardım.&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="n">http</span><span class="o">-</span><span class="n">equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=ISO-8859-9&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;keywords&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;charset,iso,8859,9,charset,windows,1254,charset,utf,8,quot,kullanımı,hakkında,yardım, charset=iso-8859-9, charset=windows-1254, charset=utf-8&amp;quot; kullanımı hakkında yardım., Google Webmaster forum,seo board, webmaster tools, wordpress adsense, google optimizasyon, dedicated server, hosting&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;description&quot;</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;Arkadaşlar öncelikle merhaba, bir sorum olucak benim haber sitemde &amp;lt;meta http-equiv=&amp;quot;Content-Type&amp;quot; content=&amp;quot;text/html; charset=iso-8859-9&amp;quot; /&amp;gt; yazılımcı bunu kullanıyor ancak&quot;</span><span class="o">/&gt;</span> <span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting html_encoding_tst.html
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[59]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">h</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;html_encoding_tst.html&#39;</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="o">=</span><span class="n">look_for_encoding</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># a is  class bytes</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+b&apos;ISO-8859-9&apos;
+ISO-8859-9
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="messages-parsing">Messages parsing</h3>
+<p>This example is taken from the course <a href="http://www.ucs.cam.ac.uk/docs/course-notes/unix-courses/PythonRE">Python: regular expressions</a> at UIS - university of Cambridge. The goal is to extract the lines like &gt;Jun 30 03:02:16 noether sshd[9515]: Invalid user gopher from 65.19.189.149</p>
+<blockquote>
+<p>Jul 1 07:41:11 noether sshd[14506]: Invalid user test from 210.51.172.168</p>
+</blockquote>
+<p>of the log /var/log/messages of a workstation subjected to hackers attacks. We want not only to extract these lines, but also to keep the date, username and IP of the attempts, eg as a list of tuples.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[73]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s">^</span>
+<span class="s">([A-Z][a-z]{2})\s+       # Month</span>
+<span class="s">([123][0-9])\s+       # Day</span>
+<span class="s">(\d\d:\d\d:\d\d)\         # Time</span>
+<span class="s">noether\s+  sshd</span>
+<span class="s">\[\d+\]:\s+             # Process ID</span>
+<span class="s">Invalid\s+  user\ </span>
+<span class="s">(\w+)                   # Fake user ID</span>
+<span class="s">\s+from\s+</span>
+<span class="s">(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})     # Host address</span>
+<span class="s">$</span>
+<span class="s">&#39;&#39;&#39;</span>
+
+<span class="n">regexp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;messages&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">hacks</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="c">#print(line)</span>
+    
+    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+       <span class="c"># print(line)</span>
+        <span class="n">hacks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">+</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">+</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">hacks</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">data</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+[(&apos;Jun 25 23:47:33&apos;, &apos;account&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:34&apos;, &apos;adam&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:35&apos;, &apos;adi&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:36&apos;, &apos;adina&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:37&apos;, &apos;adm&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:41&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:42&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:43&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:44&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun 25 23:47:45&apos;, &apos;adrian&apos;, &apos;207.54.140.124&apos;)]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is even much easier to just launch a <code>findall</code> over the whole file, instead of doing a loop and test over each line. It goes like this: &gt;Note that we must use the MULTILINE flag, sice the regex pattern includes the ^ and</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[74]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pattern</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;</span>
+<span class="s">^</span>
+<span class="s">([A-Z][a-z]{2})\s+       # Month</span>
+<span class="s">([123][0-9])\s+       # Day</span>
+<span class="s">(\d\d:\d\d:\d\d)\         # Time</span>
+<span class="s">noether\s+  sshd</span>
+<span class="s">\[\d+\]:\s+             # Process ID</span>
+<span class="s">Invalid\s+  user\ </span>
+<span class="s">(\w+)                   # Fake user ID</span>
+<span class="s">\s+from\s+</span>
+<span class="s">(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})     # Host address</span>
+<span class="s">$</span>
+<span class="s">&#39;&#39;&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;messages&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">newregexp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="n">out</span><span class="o">=</span><span class="n">newregexp</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+[(&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:33&apos;, &apos;account&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:34&apos;, &apos;adam&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:35&apos;, &apos;adi&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:36&apos;, &apos;adina&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:37&apos;, &apos;adm&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:41&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:42&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:43&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:44&apos;, &apos;admin&apos;, &apos;207.54.140.124&apos;), (&apos;Jun&apos;, &apos;25&apos;, &apos;23:47:45&apos;, &apos;adrian&apos;, &apos;207.54.140.124&apos;)]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="substitution">Substitution</h3>
+<p>An interesting application is also to substitute things according to a regex. As an illustration, we look for a simple conversion of bold and italic tags in a makdown text. In <a href="https://help.github.com/articles/markdown-basics">markdown</a>, <strong>bold</strong> is indicated by <code>**bold**</code>or <code>__bold__</code> and <em>italic</em> by <code>*italic*</code> or <code>_italic_</code>. Therefore, the goal is to look for groups delimited by a pair of <code>*</code>, <code>**</code>, etc and then substitute them by another tagged version, e.g. an html tag.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[3]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">txt</span><span class="o">=</span><span class="s">&quot;&quot;&quot;This is a simple text in markdown, with **bold**, _italic_;</span>
+<span class="s">            another __bold__ **and** *another italic*. </span>
+<span class="s">The goal is to convert this into an html version.&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[56]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">txt</span><span class="o">=</span><span class="s">&quot;&quot;&quot;This is a simple text in markdown, with **bold**, _italic_;</span>
+<span class="s">another __bold__ **and** *another italic*. </span>
+<span class="s">The goal is to convert this into an _html_ version.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">p1</span><span class="o">=</span><span class="s">&#39;\*\*(?P&lt;bf&gt;.*)\*\*&#39;</span>
+<span class="n">p2</span><span class="o">=</span><span class="s">&#39;__(?P&lt;bf&gt;.*)__&#39;</span>
+<span class="n">p3</span><span class="o">=</span><span class="s">&#39;\*(?P&lt;it&gt;.*)\*&#39;</span>
+<span class="n">p4</span><span class="o">=</span><span class="s">&#39;_(?P&lt;it&gt;.*)_&#39;</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="s">&#39;&lt;b&gt;\g&lt;bf&gt;&lt;/b&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="s">&#39;&lt;b&gt;\g&lt;bf&gt;&lt;/b&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p3</span><span class="p">,</span><span class="s">&#39;&lt;i&gt;\g&lt;it&gt;&lt;/i&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p4</span><span class="p">,</span><span class="s">&#39;&lt;i&gt;\g&lt;it&gt;&lt;/i&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+This is a simple text in markdown, with &lt;b&gt;bold&lt;/b&gt;, &lt;i&gt;italic&lt;/i&gt;;
+another &lt;b&gt;bold&lt;/b&gt; &lt;b&gt;and&lt;/b&gt; &lt;i&gt;another italic&lt;/i&gt;. 
+The goal is to convert this into an &lt;i&gt;html&lt;/i&gt; version.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Without named groups, it is needed to escape the groups backreferences, otherwise they are interpreted as octal character code escapes.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[7]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">txt</span><span class="o">=</span><span class="s">&quot;&quot;&quot;This is a simple text in markdown, with **bold**, _italic_;</span>
+<span class="s">another __bold__ **and** *another italic*. </span>
+<span class="s">The goal is to convert this into an _html_ version.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">p1</span><span class="o">=</span><span class="s">&#39;\*\*(.*)\*\*&#39;</span>
+<span class="n">p2</span><span class="o">=</span><span class="s">&#39;__(.*)__&#39;</span>
+<span class="n">p3</span><span class="o">=</span><span class="s">&#39;\*(.*)\*&#39;</span>
+<span class="n">p4</span><span class="o">=</span><span class="s">&#39;_(.*)_&#39;</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="s">&#39;&lt;b&gt;</span><span class="se">\\</span><span class="s">1&lt;/b&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="s">&#39;&lt;b&gt;</span><span class="se">\\</span><span class="s">1&lt;/b&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p3</span><span class="p">,</span><span class="s">&#39;&lt;i&gt;</span><span class="se">\\</span><span class="s">1&lt;/i&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p4</span><span class="p">,</span><span class="s">&#39;&lt;i&gt;</span><span class="se">\\</span><span class="s">1&lt;/i&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+This is a simple text in markdown, with &lt;b&gt;bold&lt;/b&gt;, &lt;i&gt;italic&lt;/i&gt;;
+another &lt;b&gt;bold&lt;/b&gt; &lt;b&gt;and&lt;/b&gt; &lt;i&gt;another italic&lt;/i&gt;. 
+The goal is to convert this into an &lt;i&gt;html&lt;/i&gt; version.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a more efficient implementation</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[12]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">txt</span><span class="o">=</span><span class="s">&quot;&quot;&quot;This is a simple text in markdown, with **bold**, _italic_;</span>
+<span class="s">another __bold__ **and** *another italic*. </span>
+<span class="s">The goal is to convert this into an _html_ version.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">p1</span><span class="o">=</span><span class="s">&#39;([_\*]{1})(.*)</span><span class="se">\\</span><span class="s">1&#39;</span>
+<span class="n">p2</span><span class="o">=</span><span class="s">&#39;([_\*]{2})(.*)</span><span class="se">\\</span><span class="s">1&#39;</span> <span class="c"># match a single character present in the list two times</span>
+
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="s">&#39;&lt;i&gt;</span><span class="se">\\</span><span class="s">2&lt;/i&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="s">&#39;&lt;b&gt;</span><span class="se">\\</span><span class="s">2&lt;/b&gt;&#39;</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+This is a simple text in markdown, with &lt;i&gt;bold&lt;/i&gt;, &lt;b&gt;italic&lt;/b&gt;;
+another &lt;i&gt;bold&lt;/i&gt; &lt;i&gt;and&lt;/i&gt; &lt;b&gt;another italic&lt;/b&gt;. 
+The goal is to convert this into an &lt;b&gt;html&lt;/b&gt; version.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="gps-location-from-a-google-map-page">GPS location from a google-map page</h3>
+<p>While it is possible to directly use Google's <a href="https://developers.google.com/maps/documentation/javascript/geocoding">Geocoding API</a>, or even a dedicated python module like <a href="https://pypi.python.org/pypi/geopy">geopy</a>. It is still amusing to extract the GPS location from a google maps webpage. This is easily done using a regex expression on the html response to a location request. This is the objective of the following script.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[13]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">coordGPS</span><span class="o">.</span><span class="n">py</span>
+<span class="c">#!/usr/bin/env python3</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on May24, 2014</span>
+<span class="sd">Last updated on July 19, 2014</span>
+<span class="sd">@author: bercherj</span>
+<span class="sd">&quot;&quot;&quot;</span>
+ 
+<span class="k">def</span> <span class="nf">coord</span><span class="p">(</span><span class="n">city</span><span class="p">,</span><span class="n">proxies</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    inputs:</span>
+<span class="sd">    ------ </span>
+<span class="sd">       city: string</span>
+<span class="sd">           name of the searched city </span>
+<span class="sd">    outputs:</span>
+<span class="sd">    ------- </span>
+<span class="sd">      latlng: tuple </span>
+<span class="sd">           GPS coordinates (lat, lng)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">urllib.parse</span>
+    <span class="kn">import</span> <span class="nn">urllib.request</span>
+    <span class="kn">import</span> <span class="nn">re</span> 
+        
+    <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;http://maps.google.fr/maps&#39;</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;saddr&#39;</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">city</span><span class="p">),</span> 
+              <span class="s">&#39;f&#39;</span><span class="p">:</span><span class="s">&#39;d&#39;</span><span class="p">}</span>
+    
+                   
+    <span class="n">proxy_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span>
+
+    <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">proxy_handler</span><span class="p">)</span>
+    
+    <span class="c">#opener = urllib.request.FancyURLopener(proxies)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s">&#39;/?&#39;</span><span class="o">+</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">the_page</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;latin1&#39;</span><span class="p">)</span>
+    <span class="c">#the_page = response.read().decode(&#39;utf8&#39;)</span>
+            
+    <span class="n">latlng</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;latlng:{lat:([-0-9.]*),lng:([-0-9.]*)},&#39;</span><span class="p">,</span><span class="n">the_page</span><span class="p">)</span>
+           
+    <span class="k">return</span> <span class="n">latlng</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+	    
+	<span class="kn">import</span> <span class="nn">argparse</span>
+
+	<span class="n">whatitdoes</span><span class="o">=</span><span class="s">&quot;This program returns the GPS location given the name of a city. It uses the information given by google maps.&quot;</span>
+	<span class="n">myself</span><span class="o">=</span><span class="s">&quot;(c) JFB&quot;</span>
+	<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">whatitdoes</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="n">myself</span><span class="p">)</span>
+
+	<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+	<span class="c"># no option eg  &#39;-o&#39; &#39;--output&#39; # ==&gt; mandatory argument</span>
+	<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Name of cities to be processed&#39;</span><span class="p">,</span>
+	<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;cities&#39;</span><span class="p">,</span>
+	<span class="n">default</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;grenoble&#39;</span><span class="p">],</span>
+	<span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span>
+	<span class="n">nargs</span> <span class="o">=</span> <span class="s">&#39;*&#39;</span>
+	<span class="p">)</span>
+	<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+	<span class="s">&#39;-v&#39;</span><span class="p">,</span>
+	<span class="s">&#39;--verbose&#39;</span><span class="p">,</span>
+	<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Prints information&#39;</span><span class="p">,</span>
+	<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;verbose&#39;</span><span class="p">,</span>
+	<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+	<span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span>
+	<span class="p">)</span>
+	
+	<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+	<span class="s">&#39;-p&#39;</span><span class="p">,</span>
+	<span class="s">&#39;-proxy&#39;</span><span class="p">,</span>
+	<span class="s">&#39;--proxy&#39;</span><span class="p">,</span>
+	<span class="n">help</span> <span class="o">=</span> <span class="s">&#39;Takes proxy configuration from &quot;proxy.cfg&quot;&#39;</span><span class="p">,</span>
+	<span class="n">dest</span> <span class="o">=</span> <span class="s">&#39;proxy&#39;</span><span class="p">,</span>
+	<span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+	<span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span>
+	<span class="p">)</span>
+	
+
+	<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+	
+	<span class="n">proxies</span><span class="o">=</span><span class="p">{}</span>
+	<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">proxy</span><span class="p">:</span>
+		<span class="kn">import</span> <span class="nn">configparser</span>
+		<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+		<span class="n">s</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;proxy.cfg&#39;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">s</span><span class="p">:</span> <span class="c">#if the cfg file exists</span>
+			<span class="n">proxies</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;proxies&#39;</span><span class="p">])</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span>
+
+
+	<span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">cities</span><span class="p">):</span>
+		<span class="k">print</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>	
+		<span class="n">ll</span><span class="o">=</span><span class="n">coord</span><span class="p">(</span><span class="n">city</span><span class="p">,</span><span class="n">proxies</span><span class="p">)</span>
+		<span class="k">print</span><span class="p">(</span><span class="n">city</span><span class="o">+</span><span class="s">&quot;: Latitude: {0}, Longitude: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ll</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ll</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Overwriting coordGPS.py
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[78]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">coordGPS</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+usage: coordGPS.py [-h] [-v] [-p] [cities [cities ...]]
+
+This program returns the GPS location given the name of a city. It uses the
+information given by google maps.
+
+positional arguments:
+  cities               Name of cities to be processed
+
+optional arguments:
+  -h, --help           show this help message and exit
+  -v, --verbose        Prints information
+  -p, -proxy, --proxy  Takes proxy configuration from &quot;proxy.cfg&quot;
+
+(c) JFB
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[77]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">coordGPS</span><span class="o">.</span><span class="n">py</span> <span class="n">G</span><span class="err">é</span><span class="n">rone</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Namespace(cities=[&apos;Gérone&apos;], proxy=False, verbose=False)
+{}
+Gérone
+Gérone: Latitude: 41.9794, Longitude: 2.821426
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[1]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[1]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+<div class="output_html rendered_html">
+
+    <small>
+    <p> This post was written as an IPython notebook.  It is available for
+    <a href="http://jfbercher.github.com/downloads/notebooks/regex_experiments.ipynb">download</a> or as a static
+    <a href="http://nbviewer.ipython.org/url/jfbercher.github.com/downloads/notebooks/regex_experiments.ipynb">html</a>.</p>
+    <p></p>
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+    alt="Creative Commons License" style="border-width:0"
+    src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
+    xmlns:dct="http://purl.org/dc/terms/"
+    property="dct:title">jfblog</span> by <a
+    xmlns:cc="http://creativecommons.org/ns#" href="http://jfbercher.github.io/"
+    property="cc:attributionName" rel="cc:attributionURL">J.-F. Bercher</a> is
+    licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+    Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a
+    xmlns:dct="http://purl.org/dc/terms/" href="http://jfbercher.github.io/"
+    rel="dct:source">http://jfbercher.github.io/</a>.
+        
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">J.-F. Bercher</span>
+  </span>
+<time datetime="2014-08-06T22:12:00" pubdate>Aug 06, 2014</time>  <span class="categories">
+    <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
@@ -1323,6 +2213,9 @@ jQuery(document).ready(function($) {
 </p></footer>
 	<script type="text/javascript">
 	  var disqus_shortname = 'jfb-log';
+          var disqus_identifier = '/blog/2014/08/06/regex_experiments/';
+          var disqus_url = 'http://jfbercher.github.io/blog/2014/08/06/regex_experiments/';
+          var disqus_title = 'Regular expressions experiments';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
