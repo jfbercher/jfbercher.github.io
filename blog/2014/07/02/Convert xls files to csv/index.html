@@ -1275,7 +1275,7 @@ jQuery(document).ready(function($) {
   <article class="hentry" role="article">
 <header>
       <h1 class="entry-title">Convert xls files to csv</h1>
-      <p class="meta"><time datetime="2014-07-02T22:12:00" pubdate>juil. 02, 2014</time></p>
+      <p class="meta"><time datetime="2014-07-02T22:12:00" pubdate>Jul 02, 2014</time></p>
 </header>
 
   <div class="entry-content"><p>
@@ -1288,7 +1288,7 @@ sh = wb.sheet_by_name(<span class="st">&#39;Sheet1&#39;</span>)</code></pre>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[71]:
+In&nbsp;[3]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">file</span> <span class="n">xls2csv</span><span class="o">.</span><span class="n">py</span> 
@@ -1305,9 +1305,11 @@ In&nbsp;[71]:
     <span class="n">sh</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">sheets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
               
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
-        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xlsx&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xls&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="c">#Here the split operation works for both xls and xlsx </span>
+        <span class="c">#extensions, since we only keeo the [0] part</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xlsx&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+        <span class="n">your_csv_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.xls&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;.csv&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
     <span class="n">wr</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">your_csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">rownum</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">nrows</span><span class="p">):</span>
@@ -1356,7 +1358,7 @@ In&nbsp;[71]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-Overwriting xls2csv.py
+Writing xls2csv.py
 
 </pre>
 </div>
@@ -1372,7 +1374,7 @@ Overwriting xls2csv.py
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[63]:
+In&nbsp;[7]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">ls</span> <span class="n">Notes</span><span class="o">*.</span><span class="n">xls</span>
@@ -1388,11 +1390,8 @@ In&nbsp;[63]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-NotesB1ST02-ISBS1-2012.xls
-NotesB2ST02-ISBS2-2013-14.xls
-NotesB2ST12- AdaEtClassif-ISBS2-2013-14 (1).xls
-NotesB2ST12- AdaEtClassif-ISBS2-2013-14.xls
-NotesB2ST12-ISBS2-2013-14.xls
+NotesB1ST02-ISBS1-2012.xls     NotesB2ST12- AdaEtClassif-ISBS2-2013-14 (1).xls  NotesB2ST12-ISBS2-2013-14.xls
+NotesB2ST02-ISBS2-2013-14.xls  NotesB2ST12- AdaEtClassif-ISBS2-2013-14.xls
 
 </pre>
 </div>
@@ -1405,7 +1404,7 @@ NotesB2ST12-ISBS2-2013-14.xls
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[74]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">xls2csv</span> <span class="o">-</span><span class="n">h</span>
@@ -1426,7 +1425,7 @@ usage: xls2csv.py [-h] [-v] [argfiles [argfiles ...]]
 This program converts a series of xls[x] files into csv.
 
 positional arguments:
-  argfiles       List of files to convert (accepts regular expression)
+  argfiles       List of files to convert (accepts regular expressions)
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -1445,7 +1444,7 @@ optional arguments:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[73]:
+In&nbsp;[9]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%</span><span class="k">run</span> <span class="n">xls2csv</span> <span class="o">-</span><span class="n">vv</span> <span class="s">&quot;Note\*.xls&quot;</span>
@@ -1484,7 +1483,7 @@ Converting NotesB1ST02-ISBS1-2012.xls
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[78]:
+In&nbsp;[11]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">HTML</span><span class="p">(</span><span class="n">the_end</span><span class="p">(</span><span class="n">theNotebook</span><span class="p">))</span>
@@ -1498,7 +1497,7 @@ In&nbsp;[78]:
 
 
 <div class="hbox output_area"><div class="prompt output_prompt">
-    Out[78]:</div>
+    Out[11]:</div>
 <div class="box-flex1 output_subarea output_pyout">
 
 <div class="output_html rendered_html">
@@ -1535,7 +1534,7 @@ In&nbsp;[78]:
   <span class="byline author vcard">
     Posted by <span class="fn">J.-F. Bercher</span>
   </span>
-<time datetime="2014-07-02T22:12:00" pubdate>juil. 02, 2014</time>  <span class="categories">
+<time datetime="2014-07-02T22:12:00" pubdate>Jul 02, 2014</time>  <span class="categories">
     <a class="category" href="http://jfbercher.github.io/tag/misc.html">misc</a>
     <a class="category" href="http://jfbercher.github.io/tag/xls.html">xls</a>
   </span>
@@ -1572,7 +1571,7 @@ In&nbsp;[78]:
  
   <section>
   <h1>Tags</h1>
-    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>,    <a href="http://jfbercher.github.io/tag/xls.html">xls</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>  </section>
+    <a href="http://jfbercher.github.io/tag/xls.html">xls</a>,    <a href="http://jfbercher.github.io/tag/misc.html">misc</a>,    <a href="http://jfbercher.github.io/tag/ipython.html">ipython</a>  </section>
 
 
     <section>

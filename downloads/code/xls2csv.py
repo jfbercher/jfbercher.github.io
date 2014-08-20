@@ -11,9 +11,11 @@ def csv_from_excel(file):
     sh = wb.sheet_by_name(sheets[0])
               
     if sys.version_info >= (3,0,0):
-        your_csv_file = open(file.split('.xlsx')[0] + '.csv', 'w', newline='')
+        your_csv_file = open(file.split('.xls')[0] + '.csv', 'w', newline='')
+        #Here the split operation works for both xls and xlsx 
+        #extensions, since we only keeo the [0] part
     else:
-        your_csv_file = open(file.split('.xlsx')[0] + '.csv', 'wb')
+        your_csv_file = open(file.split('.xls')[0] + '.csv', 'wb')
     wr = csv.writer(your_csv_file, delimiter='\t', quoting=csv.QUOTE_NONE)
 
     for rownum in range(sh.nrows):
@@ -29,11 +31,11 @@ if __name__ == '__main__':
     whatitdoes="This program converts a series of xls[x] files into csv."
     myself="(c) JFB 2014"
     parser = argparse.ArgumentParser(description=whatitdoes, epilog=myself)
-
+    # mandatory argument
     parser.add_argument(
-    help = 'List of files to convert (accepts regular expression)',
+    help = 'List of files to convert (accepts regular expressions)',
     dest = 'argfiles', default = '*.xls*', type = str,  nargs = '*')
-
+    # verbosity flag
     parser.add_argument('-v','--verbose', help = 'Prints information',
     dest = 'verbose', default = False,   #action='store_true'
     action='count')
@@ -45,19 +47,7 @@ if __name__ == '__main__':
     if verbose==2: print("glog.glog expansion: ", xlsx_files, '\n')
     if len(xlsx_files) == 0:
         raise RuntimeError('No XLSX files to convert.')
-    """    
-    if len(sys.argv)>1:
-        #print("Converting ",sys.argv[1])
-        if verbose: print("script arg: ", sys.argv)
-        xlsx_files = glob.glob(sys.argv[1])
-        if verbose: print("glog.glog expansion: ", xlsx_files, '\n')
-    else:
-        xlsx_files = glob.glob('*.xls*')
-        
-    if len(xlsx_files) == 0:
-        raise RuntimeError('No XLSX files to convert.')
-    	
-    """        
+          
     for file in xlsx_files:
         if verbose:
             print("Converting {}".format(file))
